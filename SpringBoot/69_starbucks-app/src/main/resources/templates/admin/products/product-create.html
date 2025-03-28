@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品登録</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="bg-gray-100">
+<div class="min-h-screen p-6">
+    <div class="max-w-2xl mx-auto">
+        <div class="mb-4">
+            <h2 class="text-2xl font-bold text-gray-800">商品登録</h2>
+        </div>
+        <div th:if="${error}" class="text-red-600 bg-red-100 p-3 rounded mb-4">
+            <p th:text="${error}"></p>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+            <form th:action="@{/admin/products/create}" method="post" enctype="multipart/form-data" th:object="${productForm}">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- 左カラム：基本情報 -->
+                    <div>
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">商品名</label>
+                            <input type="text" id="name" name="name" th:field="*{name}" required
+                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="description">説明</label>
+                            <textarea id="description" name="description" th:field="*{description}" rows="3"
+                                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="price">価格</label>
+                            <input type="number" id="price" name="price" th:field="*{price}" required
+                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                            <div th:if="${#fields.hasErrors('price')}" class="text-red-500">
+                                <p th:errors="*{price}"></p>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="size">サイズ</label>
+                            <select id="size" name="size" th:field="*{size}"
+                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                                <option th:each="size : ${T(com.starbucks.shop.entity.Order.CoffeeSize).values()}"
+                                        th:value="${size}" th:text="${size}"
+                                        th:selected="${productForm.size == size}"></option>
+                            </select>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2">
+                                <input type="checkbox" th:field="*{isAvailable}">
+                                販売可能
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- 右カラム：画像関連 -->
+                    <div>
+                        <!-- プレビュー表示エリア -->
+                        <div id="previewContainer" class="preview-container mt-4">
+                            <p class="text-sm font-bold text-gray-700 mb-2">プレビュー</p>
+                            <div class="image-container">
+                                <img id="preview" class="img-preview rounded" alt="プレビュー">
+                                <div class="image-overlay"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-gray-700 text-sm font-bold mb-2" for="imageFile">画像アップロード</label>
+                            <input type="file" id="imageFile" name="imageFile"
+                                   accept="image/jpeg,image/png,image/gif,image/webp"
+                                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+                            <div class="mt-2 text-sm text-gray-500">
+                                <p>※対応フォーマット: JPG, PNG, GIF, WEBP</p>
+                                <p>※最大ファイルサイズ: 2MB</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-between mt-6 pt-4 border-t">
+                    <a href="/admin/products" class="text-gray-600 hover:text-gray-800">戻る</a>
+                    <button type="submit" class="btn-primary">登録</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const imageFile = document.getElementById('imageFile');
+        const previewContainer = document.getElementById('previewContainer');
+        const preview = document.getElementById('preview');
+
+        imageFile.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                if (file.size > 2 * 1024 * 1024) {
+                    alert('ファイルサイズは2MB以下にしてください');
+                    imageFile.value = '';
+                    previewContainer.classList.remove('show');
+                    return;
+                }
+                if (!file.type.startsWith('image/')) {
+                    alert('画像ファイルを選択してください');
+                    imageFile.value = '';
+                    previewContainer.classList.remove('show');
+                    return;
+                }
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.classList.add('show');
+                };
+                reader.readAsDataURL(file);
+            } else {
+                previewContainer.classList.remove('show');
+            }
+        });
+    });
+</script>
+</body>
+</html>

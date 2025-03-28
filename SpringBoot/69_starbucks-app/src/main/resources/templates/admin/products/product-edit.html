@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>商品編集</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    :root {
+        --starbucks-green: #00704A;
+    }
+    .btn-primary {
+        background-color: var(--starbucks-green);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+    }
+    .img-preview {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+    .image-container {
+        position: relative;
+        display: inline-block;
+        background-color: #f9fafb;
+        border-radius: 0.375rem;
+        padding: 0.5rem;
+    }
+    .image-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transition: opacity 0.3s;
+        border-radius: 0.375rem;
+    }
+    .image-container:hover .image-overlay {
+        opacity: 1;
+    }
+    .preview-container {
+        display: none;
+        margin-top: 1rem;
+    }
+    .preview-container.show {
+        display: block;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+<div class="min-h-screen p-6">
+  <div class="max-w-2xl mx-auto">
+    <div class="mb-4">
+      <h2 class="text-2xl font-bold text-gray-800">商品編集</h2>
+    </div>
+    <div th:if="${error}" class="text-red-600 bg-red-100 p-3 rounded mb-4">
+      <p th:text="${error}"></p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-6">
+      <form th:action="@{/admin/products/edit/{id}(id=${product.id})}" method="post" enctype="multipart/form-data" th:object="${product}">
+        <input type="hidden" name="_method" value="PUT">
+        <input type="hidden" name="imageUrl" th:value="*{imageUrl}">
+
+        <div class="grid md:grid-cols-2 gap-6">
+          <!-- 左カラム：基本情報 -->
+          <div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="name">商品名</label>
+              <input type="text" id="name" name="name" th:field="*{name}" required
+                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="description">説明</label>
+              <textarea id="description" name="description" th:field="*{description}" rows="3"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="price">価格</label>
+              <input type="number" id="price" name="price"  th:value="${#numbers.formatDecimal(product.price, 0, 0)}" required
+                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="size">サイズ</label>
+              <select id="size" name="size" th:field="*{size}"
+                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <option value="" th:selected="${product.size == null}">指定なし</option>
+                <option th:each="size : ${T(com.starbucks.shop.entity.Order.CoffeeSize).values()}"
+                        th:value="${size}" th:text="${size}"
+                        th:selected="${product.size == size}"></option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2">
+                <input type="checkbox" th:field="*{isAvailable}">
+                販売可能
+              </label>
+            </div>
+          </div>
+
+          <!-- 右カラム：画像関連 -->
+          <div>
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" id="currentImageLabel">現在の商品画像</label>
+              <div class="mb-4">
+                <div class="image-container" th:if="*{imageUrl}" id="currentImageContainer">
+                  <img th:src="*{imageUrl}" alt="商品画像" class="img-preview rounded">
+                  <div class="image-overlay"></div>
+                </div>
+                <p th:unless="*{imageUrl}" class="text-gray-500">画像は登録されていません</p>
+              </div>
+            </div>
+
+            <div>
+              <!-- プレビュー表示エリア -->
+              <div id="previewContainer" class="preview-container mt-4">
+                <p class="text-sm font-bold text-gray-700 mb-2">プレビュー</p>
+                <div class="image-container">
+                  <img id="preview" class="img-preview rounded" alt="プレビュー">
+                  <div class="image-overlay"></div>
+                </div>
+              </div>
+
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="imageFile">新しい画像をアップロード</label>
+              <input type="file" id="imageFile" name="imageFile"
+                     accept="image/jpeg,image/png,image/gif,image/webp"
+                     class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+
+              <div class="mt-2 text-sm text-gray-500">
+                <p>※画像を変更しない場合は、ファイルを選択する必要はありません</p>
+                <p>※対応フォーマット: JPG, PNG, GIF, WEBP</p>
+                <p>※最大ファイルサイズ: 2MB</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex justify-between mt-6 pt-4 border-t">
+          <a href="/admin/products" class="text-gray-600 hover:text-gray-800">戻る</a>
+          <button type="submit" class="btn-primary">更新</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+      const imageFile = document.getElementById('imageFile');
+      const previewContainer = document.getElementById('previewContainer');
+      const preview = document.getElementById('preview');
+      const currentImageContainer = document.getElementById('currentImageContainer');
+      const currentImageLabel = document.getElementById('currentImageLabel'); // 追加
+
+      imageFile.addEventListener('change', function(e) {
+          const file = e.target.files[0];
+
+          if (file) {
+              // ファイルサイズチェック (2MB)
+              if (file.size > 2 * 1024 * 1024) {
+                  alert('ファイルサイズは2MB以下にしてください');
+                  imageFile.value = '';
+                  previewContainer.classList.remove('show');
+                  return;
+              }
+
+              // 画像ファイルかどうかチェック
+              if (!file.type.startsWith('image/')) {
+                  alert('画像ファイルを選択してください');
+                  imageFile.value = '';
+                  previewContainer.classList.remove('show');
+                  return;
+              }
+
+              const reader = new FileReader();
+
+              reader.onload = function(e) {
+                preview.src = e.target.result;
+                previewContainer.classList.add('show');
+
+                // 現在の画像とラベルを非表示
+                if (currentImageContainer) {
+                    currentImageContainer.style.display = 'none';
+                }
+                if (currentImageLabel) {
+                    currentImageLabel.style.display = 'none';
+                }
+              };
+
+              reader.readAsDataURL(file);
+          } else {
+              previewContainer.classList.remove('show');
+              // 現在の画像とラベルを再表示
+              if (currentImageContainer) {
+                currentImageContainer.style.display = 'inline-block';
+              }
+              if (currentImageLabel) {
+                currentImageLabel.style.display = 'block';
+              }
+          }
+      });
+  });
+</script>
+</body>
+</html>

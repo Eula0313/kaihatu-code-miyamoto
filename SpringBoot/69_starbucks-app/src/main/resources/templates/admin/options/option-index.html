@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>オプション管理</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="bg-gray-100">
+<div class="flex h-screen">
+    <!-- サイドバーをインクルード -->
+    <div th:replace="~{admin/layout/sidebar :: sidebar}"></div>
+
+    <!-- メインコンテンツ -->
+    <div class="flex-1 ml-64 p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">オプション一覧</h2>
+            <a href="/admin/options/create" class="btn-primary">新規オプション追加</a>
+        </div>
+
+        <!-- オプション一覧テーブル -->
+        <p th:if="${error}" th:text="${error}"></p>
+        <p th:if="${complete}" th:text="${complete}"></p>
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <table class="min-w-full">
+                <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">オプション名</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">追加料金</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ステータス</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">操作</th>
+                </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                <tr th:each="option : ${options}">
+                    <td class="px-6 py-4 whitespace-nowrap" th:text="${option.id}"></td>
+                    <td class="px-6 py-4" th:text="${option.name}"></td>
+                    <td class="px-6 py-4" th:text="${'¥' + #numbers.formatDecimal(option.additionalPrice, 0, 'COMMA', 0, 'POINT')}"></td>
+                    <td class="px-6 py-4">
+                        <span th:if="${option.isAvailable}" class="px-2 py-1 text-sm text-green-800 bg-green-100 rounded-full">利用可能</span>
+                        <span th:unless="${option.isAvailable}" class="px-2 py-1 text-sm text-red-800 bg-red-100 rounded-full">利用不可</span>
+                    </td>
+                    <td class="px-6 py-4">
+                        <div class="flex space-x-3">
+                            <a th:href="@{/admin/options/edit/{id}(id=${option.id})}"
+                               class="text-blue-600 hover:text-blue-900">編集</a>
+                            <form th:action="@{/admin/options/delete/{id}(id=${option.id})}"
+                                  method="POST" class="inline"
+                                  onsubmit="return confirm('本当に削除しますか？');">
+                                <button type="submit" class="text-red-600 hover:text-red-900">削除</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="/js/admin.js"></script>
+</body>
+</html>

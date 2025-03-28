@@ -1,0 +1,359 @@
+/* style.css */
+:root {
+  --pokemon-red: #FF0000;
+  --pokemon-blue: #3B4CCA;
+  --pokemon-yellow: #FFDE00;
+  --pokemon-black: #000000;
+  --pokeball-white: #FFFFFF;
+  --grass-green: #4CAF50;
+  --water-blue: #2196F3;
+  --fire-orange: #FF5722;
+  --electric-yellow: #FFC107;
+  --background-color: #f0f0f0;
+}
+
+/* ポケモンフォントの読み込み（任意） */
+@font-face {
+  font-family: 'Pokemon Solid';
+  src: url('https://cdn.jsdelivr.net/npm/pokemon-font@1.8.1/fonts/pokemon-solid.woff2') format('woff2');
+}
+
+/* 基本的なスタイル */
+body {
+  font-family: 'Arial Rounded MT Bold', 'Helvetica Rounded', Arial, sans-serif;
+  background: var(--background-color);
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 20px;
+}
+
+/* 背景のポケモンパターン */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 10% 20%, transparent 20%, rgba(255, 222, 0, 0.1) 21%, transparent 22%),
+    radial-gradient(circle at 90% 80%, transparent 20%, rgba(59, 76, 202, 0.1) 21%, transparent 22%),
+    radial-gradient(circle at 50% 50%, transparent 20%, rgba(255, 0, 0, 0.1) 21%, transparent 22%);
+  background-size: 100px 100px;
+  z-index: -1;
+  animation: backgroundFloat 20s infinite linear;
+}
+
+/* メインコンテンツ */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 10px;
+  background: linear-gradient(to right, var(--fire-orange), var(--water-blue), var(--grass-green));
+  animation: rainbowShift 3s infinite linear;
+}
+
+/* ヘッダースタイル */
+h1 {
+  font-family: 'Pokemon Solid', sans-serif;
+  color: var(--pokemon-blue);
+  text-align: center;
+  font-size: 2.8em;
+  margin-bottom: 30px;
+  text-shadow:
+    2px 2px 0 var(--pokemon-yellow),
+    4px 4px 0 rgba(0,0,0,0.2);
+  letter-spacing: 2px;
+  transform-origin: center;
+  animation: titlePulse 3s infinite ease-in-out;
+}
+
+/* ポケボールデザインのボタン */
+button,
+[type="submit"] {
+  background: linear-gradient(to bottom, var(--pokemon-red) 50%, var(--pokeball-white) 50%);
+  /*color: white;*/
+  padding: 10px 7px;
+  border-radius: 25px;
+  font-size: 1.1em;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.3s ease;
+  overflow: hidden;
+  margin: 5%
+}
+
+button::before,
+[type="submit"]::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  /* background: white;*/
+  /* border: 3px solid var(--pokemon-black);*/
+  border-radius: 50%;
+  z-index: 1;
+}
+
+button:hover,
+[type="submit"]:hover {
+  transform: scale(1.05) rotate(-2deg);
+  animation: buttonWiggle 0.5s ease;
+}
+
+/* テーブルスタイル */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 20px 0;
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+td {
+    text-align:center;
+}
+
+th {
+  background: var(--pokemon-blue);
+  color: white;
+  padding: 15px;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+th::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  animation: shine 3s infinite linear;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(59, 76, 202, 0.05);
+}
+
+tr:hover {
+  background-color: rgba(255, 222, 0, 0.1);
+  transform: scale(1.01);
+  transition: all 0.3s ease;
+}
+
+/* フォームスタイル */
+input, select {
+  width: 100%;
+  padding: 12px 0px;
+  margin: 8px 0;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+input:focus, select:focus {
+  border-color: var(--pokemon-yellow);
+  outline: none;
+  box-shadow: 0 0 10px rgba(255, 222, 0, 0.3);
+  transform: translateY(-2px);
+}
+
+/* ナビゲーションメニュー */
+nav {
+  background: linear-gradient(135deg, var(--pokemon-red), var(--pokemon-blue));
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 20px;
+  margin: 0 10px;
+  border-radius: 20px;
+  background: rgba(255,255,255,0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  display: inline-block;
+}
+
+nav a::before {
+  content: '⚡';
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+nav a:hover {
+  background: rgba(255,255,255,0.2);
+  padding-left: 35px;
+}
+
+nav a:hover::before {
+  opacity: 1;
+}
+
+/* アニメーションキーフレーム */
+@keyframes titlePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes buttonWiggle {
+  0%, 100% { transform: rotate(-2deg); }
+  50% { transform: rotate(2deg); }
+}
+
+@keyframes shine {
+  0% { left: -100%; }
+  100% { left: 200%; }
+}
+
+@keyframes rainbowShift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes backgroundFloat {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 100px; }
+}
+
+/* ポケモンタイプカラーのバッジ */
+.type-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 15px;
+  font-size: 0.9em;
+  color: white;
+  margin: 2px;
+}
+
+.type-fire { background-color: var(--fire-orange); }
+.type-water { background-color: var(--water-blue); }
+.type-grass { background-color: var(--grass-green); }
+.type-electric { background-color: var(--electric-yellow); }
+
+/* ポケモンカードのような効果 */
+.pokemon-card {
+  background: white;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.pokemon-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.4) 50%, transparent 100%);
+  transform: rotate(45deg) translateY(-100%);
+  animation: cardShine 3s infinite;
+}
+
+@keyframes cardShine {
+  0% { transform: rotate(45deg) translateY(-100%); }
+  100% { transform: rotate(45deg) translateY(200%); }
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  main {
+    padding: 15px;
+    margin: 10px;
+  }
+
+  nav a {
+    display: block;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+}
+
+/* コンテナを左右に並べる */
+.container-wrapper {
+    display: flex;
+    justify-content: space-between; /* 左右のスペースを均等配置 */
+    align-items: flex-start; /* 上端を揃える */
+    gap: 20px; /* コンテナ間のスペース */
+}
+
+/* 個々のコンテナを制御 */
+.container {
+    flex: 1; /* 均等に幅を取る */
+    max-width: 48%; /* 幅を調整 */
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+
+/*アイコンのセレクトボックスデザイン*/
+#iconOptions {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.icon-option {
+    width: 60px;
+    height: 60px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: border-color 0.3s;
+}
+
+.icon-option:hover {
+    border-color: #FF0000; /* ホバー時に赤枠を表示 */
+}
+
+.icon-option.selected {
+    border-color: #007BFF; /* 選択時に青枠を表示 */
+}

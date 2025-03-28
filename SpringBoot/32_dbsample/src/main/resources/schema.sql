@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS `member`;
+
+CREATE TABLE `member` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`id`)
+);

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>データ更新</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="/menu" class="back-button">← 戻る</a>
+        <h1>トレーナー情報更新</h1>
+        <div style="width: 80px;"></div> <!-- バランス用の空div -->
+    </div>
+    <div class="trainer-preview">
+        <div class="trainer-info">
+            <span id="trainerNameDisplay" class="trainer-name">トレーナー名</span>
+            <img id="trainerIconPreview" src="/images/noImage.png" alt="トレーナーアイコン" class="trainer-image">
+        </div>
+        <div class="trainer-info">
+            <span id="pokemonNameDisplay" class="trainer-name">相棒のポケモン</span>
+            <img id="pokemonIconPreview" src="/images/noImage.png" alt="ポケモンアイコン" class="pokemon-image">
+        </div>
+    </div>
+    <div th:if="${complete}" class="complete-message" th:text="${complete}"></div>
+
+    <div class="update-form">
+        <form th:action="@{/update}" method="post" th:object="${trainerForm}">
+            <input type="hidden" th:field="*{trainerId}">
+
+            <div class="form-group">
+                <label for="trainer_name">トレーナー名</label>
+                <input type="text" id="trainer_name" th:field="*{trainerName}">
+            </div>
+
+            <div class="form-group">
+                <label for="trainer_level">トレーナーレベル</label>
+                <input type="text" id="trainer_level" th:field="*{trainerLevel}">
+            </div>
+
+            <div class="form-group">
+                <label for="trainerIcon">アイコン</label>
+                <select id="trainerIcon" th:field="*{trainerIconId}" required th:attr="data-trainer-id=${trainerForm.trainerIconId}">
+                    <option value="" disabled selected>選択してください</option>
+                    <!-- 選択肢はJSで追加 -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="partnerPokemon">相棒ポケモン</label>
+                <select id="partnerPokemon" th:field="*{partnerId}" required th:attr="data-pokemon-id=${trainerForm.partnerId}">
+                    <option value="" disabled selected>選択してください</option>
+                    <!-- 選択肢はJSで追加 -->
+                </select>
+            </div>
+            <input type="submit" value="更新する">
+        </form>
+    </div>
+</div>
+<script src="/js/script.js" defer></script>
+</body>
+</html>

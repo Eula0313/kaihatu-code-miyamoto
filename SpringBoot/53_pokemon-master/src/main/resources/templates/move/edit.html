@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>技一覧</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>技編集</h1>
+<form th:action="@{/moves/edit/{id}(id=${moveId})}" method="post" th:object="${moveForm}">
+    <label>名前: <input type="text" th:field="*{name}"/></label><br/>
+    <label>威力: <input type="number" th:field="*{power}"/></label><br/>
+    <!-- エラー表示 -->
+    <ul th:if="${#fields.hasErrors('*')}">
+        <li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+    </ul>
+    <button type="submit">更新</button>
+
+</form>
+</body>
+</html>

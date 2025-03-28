@@ -1,0 +1,809 @@
+/* shop.css */
+:root {
+    --starbucks-green: #006241;
+    --starbucks-dark-green: #1e3932;
+    --starbucks-gold: #CBA258;
+    --starbucks-white: #fff;
+    --starbucks-cream: #f1f8f6;
+    --starbucks-light-gray: #f9f9f9;
+    --starbucks-text: #1e3932;
+    --starbucks-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Base styles */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    color: var(--starbucks-text);
+    line-height: 1.6;
+    background-color: var(--starbucks-white);
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Header & Navigation */
+header {
+    background-color: var(--starbucks-white);
+    box-shadow: 0 2px 4px var(--starbucks-shadow);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+nav {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+}
+
+nav div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    color: var(--starbucks-green);
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    transition: color 0.2s ease;
+}
+
+nav ul {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    color: var(--starbucks-text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.2s ease;
+}
+
+nav a:hover {
+    color: var(--starbucks-green);
+}
+
+/* Main content */
+main {
+    max-width: 1440px;
+    margin: 7rem auto 3rem;
+    padding: 0 2rem;
+}
+
+/* Typography */
+h1 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    color: var(--starbucks-dark-green);
+    font-size: 2.75rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.5px;
+}
+
+h2 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    color: var(--starbucks-dark-green);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.3px;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2.5rem;
+    padding: 2rem 0;
+}
+
+.product-card {
+    background: var(--starbucks-white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 12px var(--starbucks-shadow);
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.product-card h3 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.product-card .price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--starbucks-dark-green);
+    margin: 1rem 0;
+}
+
+/* Forms */
+form {
+    background: var(--starbucks-white);
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px var(--starbucks-shadow);
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+    color: var(--starbucks-dark-green);
+}
+
+input, select {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 2px solid var(--starbucks-light-gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: var(--starbucks-green);
+}
+
+/* Buttons */
+button, .btn {
+    background-color: var(--starbucks-green);
+    color: var(--starbucks-white);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    display: inline-block;
+    text-decoration: none;
+}
+
+button:hover, .btn:hover {
+    background-color: var(--starbucks-dark-green);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--starbucks-green);
+    border: 2px solid var(--starbucks-green);
+}
+
+.btn-secondary:hover {
+    background-color: var(--starbucks-cream);
+    color: var(--starbucks-dark-green);
+    border-color: var(--starbucks-dark-green);
+}
+
+/* Order completion */
+.order-complete {
+    text-align: center;
+    padding: 4rem 0;
+    background-color: var(--starbucks-cream);
+    border-radius: 16px;
+    margin: 2rem 0;
+}
+
+.order-number {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    font-size: 2rem;
+    color: var(--starbucks-dark-green);
+    margin: 1.5rem 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    nav {
+        padding: 1rem;
+    }
+
+    nav div {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    form {
+        padding: 1.5rem;
+    }
+}
+
+/* Additional Starbucks-specific styling */
+.featured-product {
+    background: var(--starbucks-cream);
+    padding: 3rem;
+    border-radius: 24px;
+    margin: 3rem 0;
+}
+
+.product-description {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    color: var(--starbucks-text);
+    margin: 1.5rem 0;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.quantity-selector input {
+    width: 80px;
+    text-align: center;
+}
+
+/* shop.cssに追加 */
+
+/* ログイン画面のスタイル */
+.login-wrapper {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    margin-top: 80px;
+}
+
+.login-container {
+    background: var(--starbucks-white);
+    padding: 3rem;
+    border-radius: 24px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    width: 100%;
+    max-width: 480px;
+}
+
+.login-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    font-size: 2rem;
+    color: var(--starbucks-dark-green);
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.login-form label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.login-form input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--starbucks-light-gray);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.login-form input:focus {
+    border-color: var(--starbucks-green);
+    box-shadow: 0 0 0 4px rgba(0, 98, 65, 0.1);
+}
+
+.login-button {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--starbucks-green);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    margin-top: 1rem;
+    transition: all 0.2s ease;
+}
+
+.login-button:hover {
+    background-color: var(--starbucks-dark-green);
+}
+
+.error-message {
+    background-color: #fef2f2;
+    color: #dc2626;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: var(--starbucks-text);
+}
+
+.text-link {
+    color: var(--starbucks-green);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.text-link:hover {
+    text-decoration: underline;
+}
+
+/* 商品一覧画面のスタイル */
+.page-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.subtitle {
+    font-size: 1.25rem;
+    color: var(--starbucks-text);
+    margin-top: -1rem;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2.5rem;
+    padding: 2rem 0;
+}
+
+.product-card {
+    background: var(--starbucks-white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px var(--starbucks-shadow);
+    transition: all 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.placeholder-image {
+    background: var(--starbucks-cream);
+    width: 100%;
+    scale: 60%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-content {
+    padding: 1.5rem;
+}
+
+.product-content h2 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    font-size: 1.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.product-description {
+    color: var(--starbucks-text);
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.product-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.price {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--starbucks-dark-green);
+}
+
+.btn-order {
+    background-color: var(--starbucks-green);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-order:hover {
+    background-color: var(--starbucks-dark-green);
+}
+
+@media (max-width: 768px) {
+    .login-container {
+        padding: 2rem;
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1.5rem;
+        padding: 1rem;
+    }
+}
+
+
+/* 商品詳細ページのスタイル */
+.product-detail-container {
+    max-width: 1200px;
+    margin: 7rem auto 3rem;
+    padding: 0 2rem;
+}
+
+.product-detail-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    background: var(--starbucks-white);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.product-detail-image {
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.product-detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.product-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    font-size: 2.5rem;
+    color: var(--starbucks-dark-green);
+    margin-bottom: 1rem;
+}
+
+.product-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--starbucks-dark-green);
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: fit-content;
+}
+
+.quantity-btn {
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--starbucks-green);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    color: var(--starbucks-green);
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.quantity-btn:hover {
+    background: var(--starbucks-green);
+    color: white;
+}
+
+.quantity-input {
+    width: 60px;
+    text-align: center;
+    border: 1px solid var(--starbucks-light-gray);
+    border-radius: 8px;
+    padding: 0.5rem;
+}
+
+/* 注文確認画面のスタイル */
+.order-confirm-container {
+    max-width: 800px;
+    margin: 7rem auto 3rem;
+    padding: 0 2rem;
+}
+
+.order-confirm-wrapper {
+    background: var(--starbucks-white);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+}
+
+.order-summary {
+    margin: 2rem 0;
+}
+
+.order-details {
+    background: var(--starbucks-cream);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 1.5rem;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: var(--starbucks-text);
+    font-weight: 600;
+}
+
+.total-price {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid var(--starbucks-dark-green);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+/* 注文完了画面のスタイル */
+.order-complete-container {
+    max-width: 800px;
+    margin: 7rem auto 3rem;
+    padding: 0 2rem;
+}
+
+.complete-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.check-mark {
+    width: 80px;
+    height: 80px;
+    background: var(--starbucks-green);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin: 0 auto 2rem;
+}
+
+.order-number {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    font-size: 1.25rem;
+    color: var(--starbucks-dark-green);
+    margin-top: 1rem;
+}
+
+/* 共通のボタンスタイル */
+.button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .product-detail-wrapper {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1.5rem;
+    }
+
+    .order-confirm-wrapper,
+    .order-complete-wrapper {
+        padding: 1.5rem;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+}
+
+/* ヒーローセクションのスタイル */
+.hero-slider {
+    position: relative;
+    margin-top: 80px;
+    width: 100%;
+    height: 600px;
+    overflow: hidden;
+}
+
+.heroSwiper {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.slide-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.slide-content {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10%;
+    color: var(--starbucks-white);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%);
+}
+
+.slide-content.dark {
+    color: var(--starbucks-dark-green);
+    text-shadow: none;
+    background: linear-gradient(90deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
+}
+
+.slide-content h2 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.slide-content p {
+    font-size: 1.5rem;
+    max-width: 600px;
+}
+
+/* 商品一覧セクションのスタイル */
+.products-section {
+    max-width: 1440px;
+    margin: 4rem auto;
+    padding: 0 2rem;
+}
+
+.section-title {
+    font-family: 'Helvetica Neue', Helvetica, Arial, 'Noto Sans Japanese', sans-serif;
+    font-size: 2.5rem;
+    color: var(--starbucks-dark-green);
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+/* スライダーナビゲーション */
+.swiper-button-next,
+.swiper-button-prev {
+    color: var(--starbucks-white);
+    background: rgba(0, 0, 0, 0.3);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 24px;
+}
+
+.swiper-pagination-bullet {
+    width: 10px;
+    height: 10px;
+    background: var(--starbucks-white);
+    opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+    .hero-slider {
+        height: 400px;
+        margin-top: 60px;
+    }
+
+    .slide-content h2 {
+        font-size: 2.5rem;
+    }
+
+    .slide-content p {
+        font-size: 1.2rem;
+    }
+
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-slider {
+        height: 300px;
+    }
+
+    .slide-content h2 {
+        font-size: 2rem;
+    }
+
+    .slide-content p {
+        font-size: 1rem;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none;
+    }
+}

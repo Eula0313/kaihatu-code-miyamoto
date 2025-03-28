@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Session Sample</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-50 flex items-center justify-center min-h-screen">
+<div class="w-full max-w-md bg-white shadow-md rounded-lg p-8 space-y-6">
+    <h2 class="text-2xl font-bold text-blue-600 text-center mb-6">入力画面</h2>
+    <div id="exArea">
+    <form th:action="@{/confirm}" method="post" class="space-y-4">
+        <div>
+            <label class="block text-gray-700 font-semibold mb-2" for="name">名前:</label>
+            <input type="text" id="name" name="name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="名前を入力してください">
+        </div>
+        <div>
+            <label class="block text-gray-700 font-semibold mb-2" for="age">年齢:</label>
+            <input type="number" id="age" name="age" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500" placeholder="年齢を入力してください">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">確認画面へ</button>
+        </div>
+    </form>
+    </div>
+    <div id="logout">
+        <form th:action="@{/logout}" method="post" class="space-y-4">
+            <div class="text-center">
+                <button type="submit" class="w-full bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300">ログアウト</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

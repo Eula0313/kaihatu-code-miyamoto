@@ -1,0 +1,172 @@
+<!DOCTYPE html>&#10;<html xmlns:th="http://www.thymeleaf.org">&#10;<head>&#10;&#32;&#32;&#32;&#32;<meta charset="UTF-8">&#10;&#32;&#32;&#32;&#32;<meta name="viewport" content="width=device-width, initial-scale=1.0">&#10;&#32;&#32;&#32;&#32;<title>&#12486;&#12473;&#12488;&#23455;&#34892;&#30011;&#38754;</title>&#10;&#32;&#32;&#32;&#32;<style>
+    /* 全体のスタイル */
+    body {
+        font-family: 'Lato', sans-serif;
+        background-color: #f8f4f1;
+        color: #4b3832;
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        text-align: center;
+        color: #8b5e34;
+        font-size: 2.5em;
+        margin-top: 20px;
+    }
+
+    /* テーブルスタイル */
+    table {
+        width: 90%;
+        margin: 20px auto;
+        border-collapse: collapse;
+        background-color: #fff8e6;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    thead {
+        background-color: #a67856;
+        color: white;
+    }
+
+    th, td {
+        padding: 12px;
+        text-align: center;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        font-size: 1.1em;
+    }
+
+    tbody tr.even-row {
+        background-color: #f2e9e4;
+    }
+
+    tbody tr.odd-row {
+        background-color: #f9f1e6;
+    }
+
+    /* 結果のスタイル */
+    .ok {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .ng {
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    /* ボタンのスタイル */
+    button {
+        background-color: #8b5e34;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1em;
+    }
+
+    button:hover {
+        background-color: #a67856;
+    }
+
+    #screenshotButton {
+        display: block;
+        margin: 20px auto;
+        font-size: 1.2em;
+    }
+
+    #downloadLink {
+        display: none;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 1em;
+        color: #8b5e34;
+        text-decoration: none;
+    }
+
+    /* フォームスタイル */
+    form {
+        margin: 0;
+    }
+
+    .execute-btn {
+        font-size: 1em;
+        padding: 5px 10px;
+    }
+
+    /* メディアクエリ（モバイル対応） */
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2em;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        th, td {
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 15px;
+            font-size: 1em;
+        }
+    }
+
+.hostname {
+position: relative;
+font-size: 1.2em;
+color: #4b3832;
+z-index: 1;
+}
+
+.hostname::before {
+content: attr(data-text); /* hostnameのテキストを取得 */
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+z-index: -1; /* 背景として表示 */
+font-size: 4em; /* 背景の文字サイズを大きくする */
+color: rgba(0, 0, 0, 0.05); /* 薄い文字色に設定 */
+transform: rotate(-45deg); /* 文字を45度回転させる */
+white-space: nowrap;
+overflow: hidden;
+pointer-events: none; /* 背景として扱うのでイベントを無効化 */
+}
+
+.hostname::after {
+content: attr(data-text);
+position: absolute;
+top: 0;
+left: 0;
+width: 200%;
+height: 200%;
+font-size: 4em;
+color: rgba(0, 0, 0, 0.05);
+z-index: -1;
+transform: rotate(-45deg);
+white-space: nowrap;
+pointer-events: none;
+background-repeat: repeat; /* 繰り返し */
+opacity: 0.1;
+}
+
+</style>&#10;&#32;&#32;&#32;&#32;<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>&#10;</head>&#10;<body>&#10;<div id="captureArea">&#10;&#32;&#32;&#32;&#32;<h1>&#12501;&#12457;&#12540;&#12512;&#12496;&#12522;&#12487;&#12540;&#12471;&#12519;&#12531;&#12486;&#12473;&#12488;</h1>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<span th:text="${hostName}"></span>&#10;&#32;&#32;&#32;&#32;<table>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<thead>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<tr>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<th>&#38627;&#26131;&#24230;</th>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<th>&#20107;&#38917;&#38917;&#30446;</th>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<th>&#12486;&#12473;&#12488;&#20869;&#23481;</th>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<th>&#12486;&#12473;&#12488;&#12465;&#12540;&#12473;</th>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<th>&#32080;&#26524;</th>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<th>&#23455;&#34892;</th>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</tr>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</thead>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<tbody>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<tr th:each="testResult, iterStat : ${testResults}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          th:class="${iterStat.index % 2 == 0 ? 'even-row' : 'odd-row'}">&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<td th:text="${testResult.level}"></td>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<td th:text="${testResult.itemName}"></td>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<td th:text="${testResult.testContent}"></td>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<td th:text="${testResult.testCase}"></td>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<td th:text="${testResult.result}" th:classappend="${testResult.result == 'OK' ? 'ok' : 'ng'}"></td>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<td>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<form th:action="@{/}" method="post">&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<input type="hidden" name="fieldName" th:value="${testResult.fieldName}"/>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;<button type="submit" class="execute-btn">&#23455;&#34892;</button>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</form>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</td>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</tr>&#10;&#32;&#32;&#32;&#32;&#32;&#32;&#32;&#32;</tbody>&#10;&#32;&#32;&#32;&#32;</table>&#10;&#10;&#32;&#32;&#32;&#32;<!-- ボタン -->&#10;&#32;&#32;&#32;&#32;<button id="screenshotButton">&#12473;&#12463;&#12522;&#12540;&#12531;&#12471;&#12519;&#12483;&#12488;&#12434;&#25774;&#12427;</button>&#10;</div>&#10;&#10;<!-- ダウンロードリンク -->&#10;<a id="downloadLink" download="screenshot.png">&#30011;&#20687;&#12434;&#12480;&#12454;&#12531;&#12525;&#12540;&#12489;</a>&#10;&#10;<script>
+    document.getElementById('screenshotButton').addEventListener('click', function() {
+        html2canvas(document.getElementById('captureArea')).then(function(canvas) {
+            let imageData = canvas.toDataURL("image/png");
+            let downloadLink = document.getElementById('downloadLink');
+            downloadLink.href = imageData;
+            downloadLink.style.display = 'block';
+            downloadLink.click();
+        });
+    });
+</script>&#10;</body>&#10;</html>&#10;

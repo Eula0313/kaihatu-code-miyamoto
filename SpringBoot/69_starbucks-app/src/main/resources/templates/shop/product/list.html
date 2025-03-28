@@ -1,0 +1,103 @@
+<!-- list.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Starbucks - 商品一覧</title>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/css/shop.css">
+</head>
+<body>
+<!-- ヘッダーの組み込み -->
+<div th:replace="shop/layout/header :: header"></div>
+
+<main>
+    <!-- スライドショーセクション -->
+    <div class="hero-slider fade-in">
+        <div class="swiper heroSwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <div class="slide-content">
+                        <h2>New Release</h2>
+                        <p>季節限定のスペシャルドリンク</p>
+                    </div>
+                    <div class="slide-image">
+                        <img src="https://www.starbucks.co.jp/resource/kv/images/kv_241226_0600_b_pc.jpg" alt="スライド1" />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-content dark">
+                        <h2>Customization</h2>
+                        <p>お好みの一杯をカスタマイズ</p>
+                    </div>
+                    <div class="slide-image">
+                        <img src="https://www.starbucks.co.jp/resource/kv/images/kv_241226_0600_c_pc.jpg" alt="スライド2" />
+                    </div>
+                </div>
+                <div class="swiper-slide">
+                    <div class="slide-content">
+                        <h2>Our Coffee</h2>
+                        <p>厳選された豆から抽出される至福の一杯</p>
+                    </div>
+                    <div class="slide-image">
+                        <img src="https://www.starbucks.co.jp/resource/kv/images/kv_241226_0600_a_pc.jpg" alt="スライド3" />
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>
+
+    <!-- 商品一覧セクション -->
+    <div class="products-section">
+        <h1 class="section-title">ONLINE STORE</h1>
+
+        <div class="product-grid">
+            <div th:each="product : ${products}" class="product-card">
+                <div class="product-image">
+                    <img th:src="${product.imageUrl}" th:alt="${product.name}" />
+                </div>
+                <div class="product-content">
+                    <h2 th:text="${product.name}">商品名</h2>
+                    <p class="product-description" th:text="${product.description}">商品説明</p>
+                    <div class="product-footer">
+                        <span class="price" th:text="${'¥' + #numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}">価格</span>
+                        <a th:href="@{/shop/products/{id}(id=${product.id})}" class="btn-order">詳細を見る</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Swiperのスクリプト -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script>
+    const swiper = new Swiper(".heroSwiper", {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        loop: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+        effect: "fade",
+        fadeEffect: {
+            crossFade: true
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+    });
+</script>
+
+</body>
+</html>

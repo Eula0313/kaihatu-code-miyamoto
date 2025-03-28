@@ -1,0 +1,9 @@
+DROP TABLE IF EXISTS `quiz`;
+
+CREATE TABLE `quiz` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `question` TEXT NOT NULL,
+  `answer` BOOLEAN NOT NULL,
+  `author` VARCHAR(20) NOT NULL,
+  PRIMARY KEY (`id`)
+);

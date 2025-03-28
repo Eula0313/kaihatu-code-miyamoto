@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Session Sample</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script th:src="@{/js/script.js}" charset="utf-8" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body class="bg-blue-50 flex items-center justify-center min-h-screen">
+<div id="captureArea" class="w-full max-w-lg bg-white shadow-md rounded-lg p-8 space-y-6">
+    <h2 class="text-2xl font-bold text-blue-600 text-center mb-6">完了画面</h2>
+
+    <div id="exArea">
+        <form th:action="@{/index}" method="get" class="space-y-4">
+            <p class="text-lg font-semibold text-gray-700">こんにちは、<span class="text-gray-900">[[${userForm.name}]]</span>さん、</p>
+            <p class="text-lg font-semibold text-gray-700">[[${userForm.age}]]歳ですね！</p>
+            <div class="text-center">
+                <input type="submit" value="戻る" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+            </div>
+        </form>
+    </div>
+    <div id="hostName" class="text-center text-lg font-semibold text-blue-600">
+        [[${hostName}]]さん、おつかれさまでした！
+    </div>
+
+    <!-- ボタン -->
+    <button id="screenshotButton" class="w-full bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+        📷 実行確認できたのでスクリーンショットを撮る！ 📷
+    </button>
+
+    <a id="downloadLink" download="screenshot.png">画像をダウンロード</a>
+</div>
+</body>
+</html>

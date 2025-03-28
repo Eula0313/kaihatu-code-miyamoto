@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Starbucks - 商品詳細</title>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindccs/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/shop.css">
+</head>
+<body>
+<div th:replace="shop/layout/header :: header"></div>
+
+<main>
+    <div class="product-detail-container fade-in">
+        <div class="product-detail-wrapper">
+            <div class="product-detail-image">
+                <!-- プレースホルダー画像 -->
+                <div class="placeholder-image">
+                    <img th:src="${product.imageUrl}" th:alt="${product.name}" />
+                </div>
+            </div>
+
+            <div class="product-detail-content">
+                <h1 th:text="${product.name}" class="product-title">商品名</h1>
+                <p class="product-price" th:text="${'¥' + #numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}">価格</p>
+                <p class="product-description" th:text="${product.description}">商品説明</p>
+
+                <form th:action="@{/shop/orders/confirm}" method="post" th:object="${productOrderForm}" class="order-form">
+                    <input type="hidden" th:field="*{productId}"/>
+
+                    <div class="form-group">
+                        <label>カスタマイズ</label>
+                        <select th:field="*{optionId}" class="custom-select">
+                            <option value="">カスタマイズなし</option>
+                            <option th:each="option : ${options}"
+                                    th:value="${option.id}"
+                                    th:text="${option.name + '（+¥' + option.additionalPrice + '）'}">
+                            </option>
+                        </select>
+                    </div>
+                    <!-- ▼ サイズ選択を追加 ▼ -->
+                    <div class="form-group">
+                        <label>サイズ</label>
+                        <select th:field="*{size}" class="custom-select">
+                            <option th:value="${T(com.starbucks.shop.entity.Order.CoffeeSize).TALL}"
+                                    th:text="'Tall (+¥0)'">
+                            </option>
+                            <option th:value="${T(com.starbucks.shop.entity.Order.CoffeeSize).GRANDE}"
+                                    th:text="'Grande (+¥50)'">
+                            </option>
+                            <option th:value="${T(com.starbucks.shop.entity.Order.CoffeeSize).VENTI}"
+                                    th:text="'Venti (+¥100)'">
+                            </option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>数量</label>
+                        <div class="quantity-selector">
+                            <button type="button" class="quantity-btn" onclick="decrementQuantity()">-</button>
+                            <input type="number" th:field="*{quantity}" min="1" value="1" class="quantity-input" />
+                            <button type="button" class="quantity-btn" onclick="incrementQuantity()">+</button>
+                        </div>
+                    </div>
+
+                    <div class="button-group">
+                        <button type="submit" class="btn-primary">注文する</button>
+                        <a th:href="@{/shop/products}" class="btn-secondary">商品一覧に戻る</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<script>
+    function incrementQuantity() {
+        const input = document.querySelector('.quantity-input');
+        let value = parseInt(input.value, 10);
+        input.value = value + 1;
+    }
+
+    function decrementQuantity() {
+        const input = document.querySelector('.quantity-input');
+        let value = parseInt(input.value, 10);
+        if (value > 1) {
+            input.value = value - 1;
+        }
+    }
+</script>
+</body>
+</html>

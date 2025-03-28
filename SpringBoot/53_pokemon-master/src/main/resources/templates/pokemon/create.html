@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>新しいポケモンの作成</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .pokemon-card {
+            background-color: #f8f8f8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+        }
+
+        .pokemon-info {
+            flex: 1;
+            padding-left: 30px;
+        }
+
+        .pokemon-image {
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+            border-radius: 10px;
+            background-color: #ffffff;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            border: 2px solid #2a75bb;
+            border-radius: 5px;
+            font-size: 16px;
+            background-color: white;
+        }
+
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #ffcb05;
+            box-shadow: 0 0 5px rgba(42, 117, 187, 0.3);
+        }
+
+        button {
+            background-color: #2a75bb;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #1a65ab;
+            transform: translateY(-2px);
+        }
+
+        .error-list {
+            background-color: #ffebee;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .error-list li {
+            color: #c62828;
+            margin-bottom: 5px;
+            list-style-type: none;
+        }
+
+        /* 新規追加：フォームのラベルとインプットのスタイリング */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .input-group label {
+            color: #2a75bb;
+            font-size: 16px;
+        }
+
+        /* 新規追加：必須項目のマーク */
+        .required::after {
+            content: "*";
+            color: #c62828;
+            margin-left: 4px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>新しいポケモンを作成</h1>
+
+    <div class="pokemon-card">
+        <img class="pokemon-image" th:src="@{/images/noImage.png}" alt="新ポケモン">
+        <div class="pokemon-info">
+            <form th:action="@{/pokemon/create}" method="post" th:object="${pokemonForm}">
+                <div class="form-group input-group">
+                    <label class="required">名前</label>
+                    <input type="text" th:field="*{name}" placeholder="ポケモンの名前を入力" />
+                </div>
+
+                <div class="form-group input-group">
+                    <label class="required">タイプ</label>
+                    <select th:field="*{typeId}">
+                        <option value="">タイプを選択してください</option>
+                        <option th:each="type : ${types}"
+                                th:value="${type.typeId}"
+                                th:text="${type.typeNameKanji}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group input-group">
+                    <label class="required">HP</label>
+                    <input type="number" th:field="*{hp}" placeholder="1-255の間で入力" />
+                </div>
+
+                <div class="form-group input-group">
+                    <label class="required">攻撃</label>
+                    <input type="number" th:field="*{attack}" placeholder="1-255の間で入力" />
+                </div>
+
+                <div class="form-group input-group">
+                    <label class="required">技</label>
+                    <select th:field="*{moveId}">
+                        <option value="">技を選択してください</option>
+                        <option th:each="move : ${moves}"
+                                th:value="${move.moveId}"
+                                th:text="${move.name}">
+                        </option>
+                    </select>
+                </div>
+
+                <!-- エラー表示 -->
+                <ul th:if="${#fields.hasErrors('*')}" class="error-list">
+                    <li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+                </ul>
+
+                <button type="submit">作成</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

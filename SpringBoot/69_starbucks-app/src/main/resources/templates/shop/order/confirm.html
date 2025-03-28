@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Starbucks - 注文確認</title>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/shop.css">
+</head>
+<body>
+<div th:replace="shop/layout/header :: header"></div>
+
+<main>
+    <div class="order-confirm-container fade-in">
+        <div class="order-confirm-wrapper">
+            <h1>注文確認</h1>
+
+            <div class="order-summary">
+                <div class="order-item">
+                    <h2>注文内容</h2>
+                    <div class="order-details">
+                        <div class="detail-row">
+                            <span class="detail-label">商品:</span>
+                            <span class="detail-value" th:text="${product.name}">商品名</span>
+                        </div>
+                        <div class="detail-row" th:if="${option}">
+                            <span class="detail-label">カスタマイズ:</span>
+                            <span class="detail-value">
+                                <span th:text="${option.name}">オプション名</span>
+                                <span class="option-price" th:text="${'（+¥' + option.additionalPrice + '）'}">追加料金</span>
+                            </span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">サイズ:</span>
+                            <span class="detail-value" th:text="${orderForm.size}">サイズ</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">数量:</span>
+                            <span class="detail-value" th:text="${orderForm.quantity}">数量</span>
+                        </div>
+                        <div class="total-price">
+                            <span class="detail-label">合計金額:</span>
+                            <span class="detail-value price" th:text="${'¥' + #numbers.formatDecimal(totalPrice, 0, 'COMMA', 0, 'POINT')}">合計金額</span>
+                        </div>
+                    </div>
+                </div>
+
+                <form th:action="@{/shop/orders}" method="post" th:object="${orderForm}" class="confirm-form">
+                    <input type="hidden" th:field="*{productId}" />
+                    <input type="hidden" th:field="*{optionId}" />
+                    <input type="hidden" th:field="*{quantity}" />
+                    <input type="hidden" th:field="*{size}" />
+
+                    <div class="button-group">
+                        <button type="submit" class="btn-primary">注文を確定する</button>
+                        <a th:href="@{/shop/products/{id}(id=${orderForm.productId})}" class="btn-secondary">商品詳細に戻る</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

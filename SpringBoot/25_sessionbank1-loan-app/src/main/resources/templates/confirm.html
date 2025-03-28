@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>セッション課題</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-blue-50 flex items-center justify-center min-h-screen">
+<div class="w-full max-w-md bg-white shadow-md rounded-lg p-8">
+    <h2 class="text-2xl font-bold text-blue-600 text-center mb-6">申込確認画面</h2>
+    <form th:action="@{/result}" method="post" class="space-y-4">
+        <div>
+            <p class="text-lg font-semibold text-gray-700">ユーザー名: <span class="text-gray-900">[[${loanForm.name}]]</span></p>
+        </div>
+        <div>
+            <p class="text-lg font-semibold text-gray-700">金額: <span class="text-gray-900">[[*{#numbers.formatInteger(loanForm.price, 3, 'COMMA')}]]</span>円</p>
+        </div>
+        <div class="text-center">
+            <input type="submit" value="完了画面へ" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">
+        </div>
+    </form>
+</div>
+</body>
+</html>

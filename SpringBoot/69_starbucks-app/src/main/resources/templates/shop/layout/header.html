@@ -1,0 +1,24 @@
+<!-- shop/layout/header.html -->
+<!-- ヘッダー部分をフラグメントとして定義 -->
+<header th:fragment="header">
+    <nav>
+        <div>
+            <!-- ロゴ/ホームへのリンク -->
+            <a th:href="@{/shop/products}" class="logo">Coffee Shop</a>
+
+            <!-- ナビゲーションメニュー -->
+            <ul>
+                <li>
+                    <form th:action="@{/shop/products}" method="get" style="display: inline;">
+                        <button type="submit" class="nav-link">商品一覧</button>
+                    </form>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <form th:action="@{/shop/logout}" method="post" style="display: inline;">
+                        <button type="submit" class="nav-link">ログアウト</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>

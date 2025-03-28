@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ダッシュボード</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body class="bg-gray-100 p-8">
+<div id="captureArea">
+
+        <!-- ダッシュボードメインタイトル -->
+        <h1 class="text-3xl font-bold text-center mb-12 text-blue-600">管理者・スタッフダッシュボード</h1>
+
+        <!-- 管理者用エリア -->
+        <h2 class="text-2xl font-bold text-blue-600 mb-6 mt-12">管理者専用エリア</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- 統計情報カード -->
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">総ユーザー数</h3>
+                <p class="text-3xl font-bold text-blue-500">1,234</p>
+            </div>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">アクティブユーザー数</h3>
+                <p class="text-3xl font-bold text-green-500">567</p>
+            </div>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">新規登録数（今月）</h3>
+                <p class="text-3xl font-bold text-yellow-500">89</p>
+            </div>
+        </div>
+
+        <!-- 管理ツールセクション -->
+        <div class="mt-8 bg-blue-50 shadow-md rounded-lg p-6">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">ユーザー管理ツール</h3>
+            <p class="text-gray-700 mb-4">ユーザーの追加、削除、権限設定を行う管理ツールです。ユーザーのプロフィールやアクティビティの監視も行えます。</p>
+            <button class="bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300">ユーザー管理画面へ</button>
+        </div>
+
+        <!-- スタッフ用エリア -->
+        <h2 class="text-2xl font-bold text-yellow-600 mb-6 mt-12">スタッフ専用エリア</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-yellow-50 shadow-md rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">サポートツール</h3>
+                <p class="text-gray-700 mb-4">サポート業務に必要なツールやリソースがここに表示されます。顧客の対応状況などを管理できます。</p>
+                <button class="bg-yellow-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-yellow-700 transition duration-300">サポートツール画面へ</button>
+            </div>
+        </div>
+
+        <!-- 管理者・スタッフ両方のエリア -->
+        <h2 class="text-2xl font-bold text-green-600 mb-6 mt-12">管理者・スタッフ共通エリア</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- タスク管理システム -->
+            <div class="bg-green-50 shadow-md rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">タスク管理システム</h3>
+                <p class="text-gray-700 mb-4">現在のタスクの進行状況を確認し、新しいタスクを追加することができます。期限や担当者の割り当てなども行えます。</p>
+                <button class="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300">タスク管理画面へ</button>
+            </div>
+
+            <!-- 通知機能 -->
+            <div class="bg-green-50 shadow-md rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-2">通知機能</h3>
+                <p class="text-gray-700 mb-4">サイト上の重要なアクティビティやイベントについて、リアルタイムで通知が表示されます。</p>
+                <button class="bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition duration-300">通知設定</button>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold text-gray-600 mb-6 mt-12">スクリーンショットエリア</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="bg-gray-50 shadow-md rounded-lg p-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <button id="screenshotButton" class="bg-gray-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-700 transition duration-300">スクリーンショットを撮る</button>
+                    <!-- ダウンロードリンク -->
+                    <a id="downloadLink" download="screenshot.png">画像をダウンロード</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('screenshotButton').addEventListener('click', function() {
+        html2canvas(document.getElementById('captureArea')).then(function(canvas) {
+            let imageData = canvas.toDataURL("image/png");
+            let downloadLink = document.getElementById('downloadLink');
+            downloadLink.href = imageData;
+            downloadLink.style.display = 'block';
+            downloadLink.click();
+        });
+    });
+</script>
+</body>
+</html>

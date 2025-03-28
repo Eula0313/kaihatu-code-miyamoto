@@ -1,0 +1,13 @@
+##DB
+#spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+#spring.datasource.url=jdbc:mysql://java-spring-aclass.mysql.database.azure.com:3306/pokemon_master?characterEncoding=UTF-8
+#spring.datasource.username=asoAdmin
+#spring.datasource.password=y!410dey!
+
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://java-spring-aclass.mysql.database.azure.com:3306/pokemon_master?characterEncoding=UTF-8
+spring.datasource.username=asoAdmin
+spring.datasource.password=y!410dey!
+
+##DDL,DML
+spring.sql.init.mode=always

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Starbucks - 注文完了</title>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/shop.css">
+</head>
+<body>
+<div th:replace="shop/layout/header :: header"></div>
+
+<main>
+    <div class="order-complete-container fade-in">
+        <div class="order-complete-wrapper">
+            <div class="complete-header">
+                <div class="check-mark">✓</div>
+                <h1>ご注文ありがとうございます</h1>
+                <p class="order-number">注文番号: <span th:text="${order.id}">注文番号</span></p>
+            </div>
+
+            <div class="complete-content">
+                <div class="order-summary">
+                    <h2>注文内容</h2>
+                    <div class="order-details">
+                        <div class="detail-row">
+                            <span class="detail-label">商品:</span>
+                            <span class="detail-value" th:text="${product.name}">商品名</span>
+                        </div>
+                        <div class="detail-row" th:if="${option}">
+                            <span class="detail-label">カスタマイズ:</span>
+                            <span class="detail-value" th:text="${option.name}">オプション名</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">サイズ:</span>
+                            <span class="detail-value" th:text="${order.size}">サイズ</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">数量:</span>
+                            <span class="detail-value" th:text="${order.quantity}">数量</span>
+                        </div>
+                        <div class="total-price">
+                            <span class="detail-label">合計金額:</span>
+                            <span class="detail-value price" th:text="${'¥' + #numbers.formatDecimal(order.totalPrice, 0, 'COMMA', 0, 'POINT')}">合計金額</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <a th:href="@{/shop/products}" class="btn-primary">商品一覧に戻る</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

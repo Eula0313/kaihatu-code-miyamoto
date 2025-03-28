@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
+</head>
+<body>
+<h2>メンバー照会システム</h2>
+<form th:action="@{/menu}" method="POST">
+    <input type="submit" value="一覧表示" name="select">
+    <input type="submit" value="登録" name="insert">
+</form>
+</body>
+</html>

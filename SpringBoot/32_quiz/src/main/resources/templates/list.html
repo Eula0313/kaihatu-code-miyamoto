@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Sample</title>
+</head>
+<body>
+<h2>クイズ一覧</h2>
+    <table border="1">
+        <tr>
+            <td>id</td>
+            <td>クイズ</td>
+            <td>解答</td>
+            <td>作成者</td>
+        </tr>
+        <tr th:each="Quiz : ${list}">
+            <td th:text="${Quiz.id}"></td>
+            <td th:text="${Quiz.question}"></td>
+            <td th:text="${Quiz.answer}"></td>
+            <td th:text="${Quiz.author}"></td>
+        </tr>
+    </table>
+</body>
+</html>
+

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ポケモントレーナー管理</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="/menu" class="back-button">← 戻る</a>
+        <h1>トレーナー情報登録</h1>
+        <div style="width: 80px;"></div>
+    </div>
+
+    <div class="trainer-preview">
+        <div class="trainer-info">
+            <span id="trainerNameDisplay" class="trainer-name">トレーナー名</span>
+            <img id="trainerIconPreview" src="/images/noImage.png" alt="トレーナーアイコン" class="trainer-image">
+        </div>
+        <div class="trainer-info">
+            <span id="pokemonNameDisplay" class="trainer-name">相棒のポケモン</span>
+            <img id="pokemonIconPreview" src="/images/noImage.png" alt="ポケモンアイコン" class="pokemon-image">
+        </div>
+    </div>
+    <div class="trainer-form">
+        <h2>新規トレーナー登録</h2>
+        <form id="trainerForm" th:action="@{/insert}" method="post" th:object="${trainerForm}">
+            <div class="form-group">
+                <label for="trainerName">トレーナー名</label>
+                <input type="text" id="trainerName" th:field="*{trainerName}" required>
+            </div>
+            <div class="form-group">
+                <label for="trainerIcon">アイコン</label>
+                <select id="trainerIcon" th:field="*{trainerIconId}" required>
+                    <option value="" disabled selected>選択してください</option>
+                    <!-- 選択肢はJSで追加 -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="partnerPokemon">相棒ポケモン</label>
+                <select id="partnerPokemon" th:field="*{partnerId}" required>
+                    <option value="" disabled selected>選択してください</option>
+                    <!-- 選択肢はJSで追加 -->
+                </select>
+            </div>
+            <input type="hidden" name="trainerLevel" value="1">
+            <button type="submit">登録</button>
+        </form>
+    </div>
+</div>
+<script src="/js/script.js" defer></script>
+</body>
+</html>

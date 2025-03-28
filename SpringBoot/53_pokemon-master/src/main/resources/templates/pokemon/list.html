@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ポケモン一覧</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>ポケモン一覧</h1>
+<p th:if="${error}" th:text="${error}"></p>
+<p th:if="${complete}" th:text="${complete}"></p>
+<a href="/pokemon/create">新しいポケモンを作成</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>HP</th>
+        <th>攻撃</th>
+        <th>タイプ</th>
+        <th>技</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="pokemon : ${pokemon}">
+        <td th:text="${pokemon.pokemonId}"></td>
+        <td th:text="${pokemon.name}"></td>
+        <td th:text="${pokemon.hp}"></td>
+        <td th:text="${pokemon.attack}"></td>
+        <td th:text="${pokemon.typeNameKanji}"></td> <!-- タイプ名 -->
+        <td th:text="${pokemon.moveName}"></td>       <!-- 技名 -->
+        <td>
+            <form th:action="@{'/pokemon/edit/' + ${pokemon.pokemonId}}" method="get" style="display:inline;">
+                <button type="submit">編集</button>
+            </form>
+            <form th:action="@{'/pokemon/delete/' + ${pokemon.pokemonId}}" method="post" style="display:inline;">
+                <button type="submit">削除</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

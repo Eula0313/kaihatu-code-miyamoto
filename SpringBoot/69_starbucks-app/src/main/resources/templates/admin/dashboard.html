@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理者ダッシュボード</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="bg-gray-100">
+<div class="flex h-screen">
+    <!-- サイドバーをインクルード -->
+    <div th:replace="~{admin/layout/sidebar :: sidebar}"></div>
+
+    <!-- メインコンテンツ -->
+    <div class="flex-1 ml-64 p-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">ダッシュボード（サンプルデータ版）</h2>
+
+        <!-- 統計カード -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <div class="stat-card rounded-lg shadow p-6 text-white">
+                <h3 class="text-lg font-semibold mb-2">総商品数</h3>
+                <p class="text-3xl font-bold" th:text="${totalProducts}">4</p>
+            </div>
+            <div class="stat-card rounded-lg shadow p-6 text-white">
+                <h3 class="text-lg font-semibold mb-2">販売中商品</h3>
+                <p class="text-3xl font-bold" th:text="${activeProducts}">3</p>
+            </div>
+            <div class="stat-card rounded-lg shadow p-6 text-white">
+                <h3 class="text-lg font-semibold mb-2">総オプション数</h3>
+                <p class="text-3xl font-bold" th:text="${totalOptions}">4</p>
+            </div>
+            <div class="stat-card rounded-lg shadow p-6 text-white">
+                <h3 class="text-lg font-semibold mb-2">有効オプション</h3>
+                <p class="text-3xl font-bold" th:text="${activeOptions}">3</p>
+            </div>
+        </div>
+
+        <!-- 最近の商品とオプション -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- 最近の商品 -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-4 border-b flex justify-between items-center">
+                    <h3 class="text-lg font-semibold">最近追加された商品</h3>
+                    <a href="/admin/products" class="text-sm text-green-700 hover:text-green-900">全て表示</a>
+                </div>
+                <div class="p-4">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">商品名</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">価格</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">状態</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                        <tr th:each="product : ${recentProducts}">
+                            <td class="px-4 py-2" th:text="${product.name}">商品名</td>
+                            <td class="px-4 py-2" th:text="${'¥' + #numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}">価格</td>
+                            <td class="px-4 py-2">
+                                <span th:if="${product.isAvailable}" class="px-2 py-1 text-sm text-green-800 bg-green-100 rounded-full">販売中</span>
+                                <span th:unless="${product.isAvailable}" class="px-2 py-1 text-sm text-green-800 bg-green-100 rounded-full">停止中</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 最近のオプション -->
+            <div class="bg-white rounded-lg shadow">
+                <div class="p-4 border-b flex justify-between items-center">
+                    <h3 class="text-lg font-semibold">最近追加されたオプション</h3>
+                    <a href="/admin/options" class="text-sm text-green-700 hover:text-green-900">全て表示</a>
+                </div>
+                <div class="p-4">
+                    <table class="min-w-full">
+                        <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">オプション名</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">追加料金</th>
+                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">状態</th>
+                        </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-200">
+                        <tr th:each="option : ${recentOptions}">
+                            <td class="px-4 py-2" th:text="${option.name}">オプション名</td>
+                            <td class="px-4 py-2" th:text="${'¥' + #numbers.formatDecimal(option.additionalPrice, 0, 'COMMA', 0, 'POINT')}">追加料金</td>
+                            <td class="px-4 py-2">
+                                <span th:if="${option.isAvailable}" class="px-2 py-1 text-sm text-green-800 bg-green-100 rounded-full">利用可能</span>
+                                <span th:unless="${option.isAvailable}" class="px-2 py-1 text-sm text-green-800 bg-green-100 rounded-full">利用不可</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 売上情報（Chart.js） -->
+        <div class="mt-8 grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- 売上グラフ -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold mb-4">月間売上推移</h3>
+                <canvas id="salesChart"></canvas>
+            </div>
+
+            <!-- 商品別売上グラフ -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold mb-4">商品別売上比率</h3>
+                <canvas id="productSalesChart"></canvas>
+            </div>
+
+            <!-- 時間帯別注文数 -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold mb-4">時間帯別注文数</h3>
+                <canvas id="orderTimeChart"></canvas>
+            </div>
+
+            <!-- ステータス別注文数 -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-lg font-semibold mb-4">注文ステータス内訳</h3>
+                <canvas id="orderStatusChart"></canvas>
+            </div>
+
+        </div>
+
+        <!-- 売上情報（Three.js）-->
+        <div class="mt-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">3Dビジュアライゼーション</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- 3D売上グラフ -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">月間売上推移 (3D)</h3>
+                    <div id="salesChart3D" class="h-96">
+                    </div>
+                </div>
+
+                <!-- 3D商品別売上比率 -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">商品別売上比率 (3D)</h3>
+                    <div id="productSalesChart3D" class="h-96"></div>
+                </div>
+
+                <!-- 3D時間帯別注文数 -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">時間帯別注文数 (3D)</h3>
+                    <div id="orderTimeChart3D" class="h-96"></div>
+                </div>
+
+                <!-- 3Dステータス別注文数 -->
+                <div class="bg-white rounded-lg shadow p-6">
+                    <h3 class="text-lg font-semibold mb-4">注文ステータス内訳 (3D)</h3>
+                    <div id="orderStatusChart3D" class="h-96"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script src="/js/current-nav.js"></script>
+<script src="/js/charts2D.js"></script>
+<script src="/js/charts3D.js"></script>
+<script th:inline="javascript">
+    // Thymeleafからチャートデータを取得
+    const chartData = /*[[${chartData}]]*/ {};
+
+    // チャートの初期化
+    document.addEventListener('DOMContentLoaded', () => {
+        // Chart.jsの初期化
+        initializeCharts(chartData);
+
+        // Three.jsグラフの初期化
+        initializeThreeCharts(chartData);
+    });
+</script>
+</body>
+</html>

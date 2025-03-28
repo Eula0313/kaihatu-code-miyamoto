@@ -1,0 +1,49 @@
+<!-- login.html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザーログイン - Starbucks</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/shop.css">
+</head>
+<body class="bg-[#f9f9f9]">
+<div th:replace="~{shop/layout/header :: header}"></div>
+
+<div class="login-wrapper fade-in">
+    <div class="login-container">
+        <h2 class="login-title">サインイン</h2>
+
+        <!-- エラーメッセージ -->
+        <div th:if="${param.error}" class="error-message">
+            メールアドレスまたはパスワードが正しくありません。
+        </div>
+
+        <!-- ログインフォーム -->
+        <form th:action="@{/shop/login}" method="post" class="login-form">
+            <div class="form-group">
+                <label for="username">メールアドレス</label>
+                <input type="email" id="username" name="username" value="yamada@example.com" required
+                       placeholder="example@email.com">
+            </div>
+
+            <div class="form-group">
+                <label for="password">パスワード</label>
+                <input type="password" id="password" name="password" required
+                       value="adminpass123" placeholder="パスワードを入力">
+            </div>
+
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+
+            <div class="form-group">
+                <button type="submit" class="login-button">サインイン</button>
+            </div>
+
+            <div class="form-footer">
+                <p>アカウントをお持ちでない方は<a href="#" class="text-link">こちら</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

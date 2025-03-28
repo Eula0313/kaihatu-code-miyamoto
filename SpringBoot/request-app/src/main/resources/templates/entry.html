@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form th:action="@{/confirm}" method="post">
+    <div>
+      <label for="name"> 名前 ：</label>
+      <input id ="name" type="text" name="name">
+    </div>
+    <div>
+      <label for="age"> 年齢 ：</label>
+      <input id ="age" type="number" name="age" min="1" max="100">歳
+    </div>
+    <div>
+    <label for="birth"> 誕生日 ：</label>
+    <input id ="birth" type="date" name="birth">
+    </div>
+    <input type="submit" value="送信">
+  </form>
+</body>
+</html>

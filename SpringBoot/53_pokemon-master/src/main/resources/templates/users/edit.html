@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>ユーザー編集</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+  <style>
+    .trainer-profile {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 40px;
+        background: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .trainer-image-container {
+        flex-shrink: 0;
+    }
+
+    .trainer-image {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        border: 5px solid #FF0000;
+        object-fit: cover;
+    }
+
+    .trainer-info {
+        flex-grow: 1;
+    }
+
+    .trainer-name {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .trainer-level {
+        font-size: 1.2em;
+        color: #666;
+        margin-bottom: 20px;
+    }
+
+    .pokemon-section {
+        margin-top: 30px;
+    }
+
+    .pokemon-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+    }
+
+    .pokemon-card {
+        background: white;
+        border: 2px solid #ddd;
+        border-radius: 10px;
+        padding: 20px;
+        text-align: center;
+        transition: transform 0.3s;
+        position: relative;
+    }
+
+    .pokemon-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .pokemon-image {
+        width: 120px;
+        height: 120px;
+        margin: 0 auto 15px;
+        display: block;
+    }
+
+    .pokemon-name {
+        font-size: 1.2em;
+        color: #333;
+        margin-bottom: 10px;
+    }
+
+    .pokemon-type {
+        display: inline-block;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 0.9em;
+        margin: 5px;
+    }
+
+    /* ポケモンタイプごとの背景色 */
+    .type-normal { background-color: #A8A878; color: white; }
+    .type-fire { background-color: #F08030; color: white; }
+    .type-water { background-color: #6890F0; color: white; }
+    .type-electric { background-color: #F8D030; color: black; }
+    .type-grass { background-color: #78C850; color: white; }
+    .type-ice { background-color: #98D8D8; color: black; }
+    .type-fighting { background-color: #C03028; color: white; }
+    .type-poison { background-color: #A040A0; color: white; }
+    .type-ground { background-color: #E0C068; color: black; }
+    .type-flying { background-color: #A890F0; color: white; }
+    .type-psychic { background-color: #F85888; color: white; }
+    .type-bug { background-color: #A8B820; color: white; }
+    .type-rock { background-color: #B8A038; color: white; }
+    .type-ghost { background-color: #705898; color: white; }
+    .type-dragon { background-color: #7038F8; color: white; }
+    .type-dark { background-color: #705848; color: white; }
+    .type-steel { background-color: #B8B8D0; color: black; }
+    .type-fairy { background-color: #EE99AC; color: black; }
+    .battle-button {
+        display: block;
+        background-color: #FF0000;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+        text-align: center;
+        text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+<div class="container-wrapper">
+  <!-- 左側のコンテナ -->
+  <div class="container">
+    <div class="header">
+      <a href="/users" class="back-button">← 戻る</a>
+      <h1>トレーナー詳細情報</h1>
+      <div style="width: 80px;"></div> <!-- バランス用の空div -->
+    </div>
+
+    <div class="trainer-profile">
+      <div class="trainer-image-container">
+        <img src="https://i.pinimg.com/736x/67/53/aa/6753aad71ea75d2eab4cf6ce4a755d84.jpg" alt="サトシ" class="trainer-image">
+      </div>
+      <div class="trainer-info">
+        <h2 class="trainer-name">サトシ</h2>
+        <div class="trainer-level">トレーナーレベル: 25</div>
+      </div>
+    </div>
+
+    <div class="pokemon-section">
+      <h2>手持ちポケモン</h2>
+      <div class="pokemon-grid">
+        <!-- ポケモン1 -->
+        <div class="pokemon-card">
+          <img id="pokemonImage0" th:src="@{/images/charmander.png}" alt="ヒトカゲ" class="pokemon-image">
+          <div id="pokemonName0" class="pokemon-name">ヒトカゲ</div>
+        </div>
+        <!-- ポケモン2 -->
+        <div class="pokemon-card">
+          <img id="pokemonImage1" th:src="@{/images/charmander.png}" alt="ヒトカゲ" class="pokemon-image">
+          <div id="pokemonName1" class="pokemon-name">ヒトカゲ</div>
+        </div>
+        <!-- ポケモン3 -->
+        <div class="pokemon-card">
+          <img id="pokemonImage2" th:src="@{/images/charmander.png}" alt="ヒトカゲ" class="pokemon-image">
+          <div id="pokemonName2" class="pokemon-name">ヒトカゲ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 右側のコンテナ -->
+  <div class="container">
+    <h1>ユーザーを更新</h1>
+    <form th:action="@{/users/edit/{id}(id=${userId})}" method="post" th:object="${userForm}">
+      <label>メールアドレス: <input type="email" th:field="*{email}" /></label><br />
+      <label>トレーナー名: <input type="text" th:field="*{trainerName}" /></label><br />
+
+      <label>トレーナーアイコン:
+        <div id="trainerIconContainer">
+          <select th:field="*{trainerIcon}" style="display:none;">
+            <option value="icon1.png">サトシ</option>
+            <option value="icon2.png">カスミ</option>
+            <option value="icon3.png">タケシ</option>
+          </select>
+          <div id="iconOptions">
+            <img th:src="@{/images/icon1.png}" alt="Icon 1" data-value="icon1.png" class="icon-option">
+            <img th:src="@{/images/icon2.png}" alt="Icon 2" data-value="icon2.png" class="icon-option">
+            <img th:src="@{/images/icon3.png}" alt="Icon 3" data-value="icon3.png" class="icon-option">
+          </div>
+        </div>
+      </label><br />
+
+      <label>トレーナーレベル: <input type="number" th:field="*{trainerLevel}" /></label><br />
+      <label>パートナーポケモン1:
+        <select th:field="*{partnerPokemonIds[0]}">
+          <option th:each="pokemon : ${pokemons}" th:value="${pokemon.pokemonId}" th:text="${pokemon.name}"></option>
+        </select>
+      </label><br />
+      <label>パートナーポケモン2:
+        <select th:field="*{partnerPokemonIds[1]}">
+          <option th:each="pokemon : ${pokemons}" th:value="${pokemon.pokemonId}" th:text="${pokemon.name}"></option>
+        </select>
+      </label><br />
+      <label>パートナーポケモン3:
+        <select th:field="*{partnerPokemonIds[2]}">
+          <option th:each="pokemon : ${pokemons}" th:value="${pokemon.pokemonId}" th:text="${pokemon.name}"></option>
+        </select>
+      </label><br />
+      <ul th:if="${#fields.hasErrors('*')}">
+        <li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+      </ul>
+      <button type="submit">更新</button>
+    </form>
+  </div>
+</div>
+<script>
+
+  // トレーナー名の更新処理
+  function updateTrainerName() {
+      const trainerNameInput = document.getElementById("trainerName");
+      const trainerName = trainerNameInput.value;
+      const trainerNameElement = document.querySelector(".trainer-name");
+      trainerNameElement.textContent = trainerName || "サトシ";
+  }
+
+  // トレーナーレベルの更新処理
+  function updateTrainerLevel() {
+      const trainerLevelInput = document.querySelector('input[type="number"][name="trainerLevel"]');
+      const trainerLevel = trainerLevelInput.value;
+      const trainerLevelElement = document.querySelector(".trainer-level");
+      trainerLevelElement.textContent = `トレーナーレベル: ${trainerLevel || 25}`;
+  }
+
+  // 初期ロード時の処理を実行
+  updateTrainerName();
+  updateTrainerLevel();
+
+  // トレーナー名の入力イベントにバインド
+  document.getElementById("trainerName").addEventListener("input", updateTrainerName);
+  // トレーナーレベルの入力イベントにバインド
+  document.querySelector('input[type="number"][name="trainerLevel"]').addEventListener("input", updateTrainerLevel);
+
+document.addEventListener('DOMContentLoaded', () => {
+  // 初期ロード時に選択されているアイコンを反映
+  const trainerIconValue = document.getElementById('trainerIcon').value; // 現在の値を取得
+  const selectedIcon = document.querySelector(`.icon-option[data-value="${trainerIconValue}"]`);
+
+  if (selectedIcon) {
+    // 選択されたアイコンに「selected」クラスを追加
+    selectedIcon.classList.add('selected');
+
+    // トレーナー画像を変更
+    const trainerImageElement = document.querySelector(".trainer-image");
+    trainerImageElement.src = `/images/${trainerIconValue}`;
+  }
+});
+
+// 全ての画像アイコンにクリックイベントを設定
+document.querySelectorAll('.icon-option').forEach((icon) => {
+  icon.addEventListener('click', function() {
+    // 他の選択中のアイコンをリセット
+    document.querySelectorAll('.icon-option').forEach((el) => el.classList.remove('selected'));
+
+    // 選択したアイコンに「selected」クラスを追加
+    this.classList.add('selected');
+
+    // 選択された値を取得
+    const selectedValue = this.getAttribute('data-value');
+
+    // 隠れたセレクトボックスの値を更新
+    document.getElementById('trainerIcon').value = selectedValue;
+
+    // トレーナー画像を変更
+    const trainerImageElement = document.querySelector(".trainer-image");
+    trainerImageElement.src = `/images/${selectedValue}`;
+  });
+});
+
+
+  // ポケモンの画像データ
+  const pokemonImages = {
+    1: 'charmander.png',
+    2: 'squirtle.png',
+    3: 'bulbasaur.png',
+    4: 'pikachu.png',
+    5: 'geodude.png',
+    6: 'pidgey.png',
+  };
+
+  // ポケモンの名前データ
+  const pokemonNames = {
+    1: 'ヒトカゲ',
+    2: 'ゼニガメ',
+    3: 'フシギダネ',
+    4: 'ピカチュウ',
+    5: 'イシツブテ',
+    6: 'ポッポ',
+  };
+
+  // <セレクトボックスにイベントリスナーを追加></セレクトボックスにイベントリスナーを追加>
+  ['partnerPokemonIds0', 'partnerPokemonIds1', 'partnerPokemonIds2'].forEach((selectId, index) => {
+    const selectElement = document.getElementById(selectId);
+
+    // 初期ロード時の処理
+    const updatePokemonInfo = () => {
+      // 選択された値（ポケモンID）を取得
+      const selectedValue = selectElement.value;
+
+      // 対応する画像と名前を取得
+      const imageSrc = `/images/${pokemonImages[selectedValue]}`;
+      const pokemonName = pokemonNames[selectedValue];
+
+      // 対応する画像と名前を更新
+      document.querySelector(`#pokemonImage${index}`).src = imageSrc;
+      document.querySelector(`#pokemonName${index}`).textContent = pokemonName;
+    };
+
+    // 初期ロード時の実行
+    updatePokemonInfo();
+
+    // セレクトボックスの変更時の処理
+    selectElement.addEventListener('change', updatePokemonInfo);
+  });
+
+    // 全ての画像アイコンにクリックイベントを追加
+    document.querySelectorAll('.icon-option').forEach((icon) => {
+        icon.addEventListener('click', function() {
+            // 他の選択中のアイコンをリセット
+            document.querySelectorAll('.icon-option').forEach((el) => el.classList.remove('selected'));
+
+            // 選択したアイコンに「selected」クラスを追加
+            this.classList.add('selected');
+
+            // 選択された値を隠しセレクトボックスに反映
+            const selectedValue = this.getAttribute('data-value');
+            document.getElementById('trainerIcon').value = selectedValue;
+        });
+    });
+</script>
+</body>
+</html>

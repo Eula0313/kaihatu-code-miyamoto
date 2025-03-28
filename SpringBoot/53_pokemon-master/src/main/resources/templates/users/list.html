@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ユーザー一覧</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>ユーザー一覧</h1>
+<p th:if="${error}" th:text="${error}"></p>
+<p th:if="${complete}" th:text="${complete}"></p>
+<a href="/users/create">新しいユーザーを作成</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>メールアドレス</th>
+        <th>トレーナー名</th>
+        <th>トレーナーアイコン</th>
+        <th>トレーナーレベル</th>
+        <th>手持ちのポケモン</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.userId}"></td>
+        <td th:text="${user.email}"></td>
+        <td th:text="${user.trainerName}"></td>
+        <td><img th:src="@{/images/{icon}(icon=${user.trainerIcon})}" alt="トレーナーアイコン" width="50"></td>
+        <td th:text="${user.trainerLevel}"></td>
+        <td th:text="${user.partnerPokemonName}"></td>
+        <td>
+            <form th:action="@{'/users/edit/' + ${user.userId}}" method="get" style="display:inline;">
+                <button type="submit">編集</button>
+            </form>
+            <form th:action="@{'/users/delete/' + ${user.userId}}" method="post" style="display:inline;">
+                <button type="submit">削除</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

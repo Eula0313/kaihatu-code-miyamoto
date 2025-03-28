@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ポケモントレーナー管理 - メニュー</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            background-image: linear-gradient(45deg, #f3f9ff 25%, transparent 25%),
+                            linear-gradient(-45deg, #f3f9ff 25%, transparent 25%),
+                            linear-gradient(45deg, transparent 75%, #f3f9ff 75%),
+                            linear-gradient(-45deg, transparent 75%, #f3f9ff 75%);
+            background-size: 20px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #FF0000;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .menu-item {
+            background: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-color: #FF0000;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #FF0000;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .menu-icon {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #FF0000;
+        }
+
+        .menu-title {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .menu-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .menu-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        @media (max-width: 600px) {
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>ポケモントレーナー管理システム</h1>
+
+    <div class="menu-grid">
+
+        <a href="/trainer_create" class="menu-link">
+            <div class="menu-item">
+                <div class="menu-icon">➕</div>
+                <div class="menu-title">新規トレーナー登録</div>
+                <div class="menu-description">新しいトレーナーを登録</div>
+            </div>
+        </a>
+
+        <a href="/list" class="menu-link">
+            <div class="menu-item">
+                <div class="menu-icon">📋</div>
+                <div class="menu-title">トレーナー一覧</div>
+                <div class="menu-description">登録されているトレーナーの一覧を表示</div>
+            </div>
+        </a>
+
+
+        <a href="/trainer-detail" class="menu-link">
+            <div class="menu-item">
+                <div class="menu-icon">👤</div>
+                <div class="menu-title">トレーナー詳細</div>
+                <div class="menu-description">トレーナーの詳細情報を確認</div>
+            </div>
+        </a>
+
+        <a href="/pokemon-battle" class="menu-link">
+            <div class="menu-item">
+                <div class="menu-icon">⚔️</div>
+                <div class="menu-title">ポケモンバトル</div>
+                <div class="menu-description">ポケモンバトルを開始</div>
+            </div>
+        </a>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<!-- サイドバー -->
+<div th:fragment="sidebar" class="sidebar w-64 space-y-6 py-7 px-2 fixed h-full">
+    <div class="px-4">
+        <h1 class="text-xl font-bold">Admin Dashboard</h1>
+    </div>
+    <nav class="mt-10">
+        <a href="/admin/dashboard" id="dashboard-link" class="flex items-center py-2 px-4 text-gray-100 hover:bg-gray-800 rounded">
+            ダッシュボード
+        </a>
+        <a href="/admin/products" id="products-link" class="flex items-center py-2 px-4 text-gray-100 hover:bg-gray-800 rounded">
+            商品管理
+        </a>
+        <a href="/admin/options" id="options-link" class="flex items-center py-2 px-4 text-gray-100 hover:bg-gray-800 rounded">
+            オプション管理
+        </a>
+    </nav>
+</div>
+</body>
+</html>

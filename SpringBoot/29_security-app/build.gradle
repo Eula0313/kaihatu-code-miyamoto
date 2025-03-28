@@ -1,0 +1,63 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.2'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	// JUnitを使ったテストのための依存関係
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Spring MVCを使ったWebアプリケーションを作るための依存関係
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// ホットデプロイ（コードを変更したら即時反映）のための依存関係
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// Thymeleafテンプレートエンジンを使うための依存関係
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+
+	// Lombokを使ってコードを自動生成するための依存関係
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// MySQLデータベースと接続するための依存関係
+//	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+//	runtimeOnly 'com.mysql:mysql-connector-j'
+
+	// 入力値のバリデーションを行うための依存関係
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+
+	// AOP（アスペクト指向プログラミング）を使うための依存関係
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+
+	//Spring Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	testImplementation 'org.springframework.security:spring-security-test'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+//ホットデプロイにThymeleafを含める
+tasks.named('bootRun'){
+	sourceResources sourceSets.main
+}

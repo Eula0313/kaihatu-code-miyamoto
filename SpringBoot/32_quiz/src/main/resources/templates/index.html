@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Sample</title>
+</head>
+<body>
+<h2>クイズ一覧へ</h2>
+<form th:action="@{/menu}" method="post">
+    <input type="submit" value="一覧表示" name="select">
+</form>
+</body>
+</html>

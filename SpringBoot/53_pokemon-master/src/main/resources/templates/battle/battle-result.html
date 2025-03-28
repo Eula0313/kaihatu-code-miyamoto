@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>バトル結果</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-center mb-8">バトル結果</h1>
+
+  <div class="max-w-4xl mx-auto">
+    <!-- 勝者表示 -->
+    <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-6">
+      <div class="flex items-center">
+        <div class="flex-shrink-0">
+          <span class="text-yellow-500">🏆</span>
+        </div>
+        <div class="ml-3">
+          <p class="text-xl font-bold">
+            勝者: <span th:text="${result.winnerPokemon.name}">勝者名</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- バトルログ -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+      <div class="px-6 py-4">
+        <h2 class="font-bold text-xl mb-2">バトルログ</h2>
+        <div class="bg-gray-100 p-4 rounded">
+                        <pre class="whitespace-pre-wrap" th:text="${result.battleLog}">
+                            バトルログ内容
+                        </pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- 最終結果の詳細 -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden mb-6">
+      <div class="px-6 py-4">
+        <h2 class="font-bold text-xl mb-2">最終結果</h2>
+
+        <!-- 勝者の詳細 -->
+        <div class="mb-4">
+          <h3 class="font-bold text-green-600">勝者</h3>
+          <div class="ml-4">
+            <p th:text="${'ポケモン: ' + result.winnerPokemon.name}">ポケモン名</p>
+            <p th:text="${'タイプ: ' + result.winnerPokemon.typeName}">タイプ</p>
+            <p th:text="${'使用技: ' + result.winnerPokemon.moveName}">技名</p>
+          </div>
+        </div>
+
+        <!-- 敗者の詳細 -->
+        <div>
+          <h3 class="font-bold text-red-600">敗者</h3>
+          <div class="ml-4">
+            <p th:text="${'ポケモン: ' + result.loserPokemon.name}">ポケモン名</p>
+            <p th:text="${'タイプ: ' + result.loserPokemon.typeName}">タイプ</p>
+            <p th:text="${'使用技: ' + result.loserPokemon.moveName}">技名</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- アクションボタン -->
+    <div class="flex justify-center space-x-4">
+      <a href="/battle/select"
+         class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        新しいバトルを始める
+      </a>
+      <a href="/menu"
+         class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        トップページに戻る
+      </a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

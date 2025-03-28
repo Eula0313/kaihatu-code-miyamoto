@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title th:text="#{login.title}">ろぐいん認証</title>
+</head>
+<body>
+<h2 th:text="#{login.title}">ログイン認証</h2>
+<form th:action="@{/login}" method="post" th:object="${userForm}">
+  <div>
+    <label th:text="#{login.username}">ユーザーID：</label>
+    <input type="text" th:field="*{mail}">
+  </div>
+  <div>
+    <label th:text="#{login.password}">パスワード：</label>
+    <input type="password" th:field="*{password}">
+    <br>
+    <label>確認用パスワード：</label>
+    <input type="password" th:field="*{confirmPassword}">
+    <div th:if="${#fields.hasErrors('mail')}" th:errors="*{mail}"></div>
+    <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    <div th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></div>
+  </div>
+  <div th:if="${#fields.hasErrors('samePassword')}" th:errors="*{samePassword}" style="color:red;">
+  </div>
+  <div>
+    <input type="submit" th:value="#{login.submit}">
+  </div>
+</form>
+</body>
+</html>

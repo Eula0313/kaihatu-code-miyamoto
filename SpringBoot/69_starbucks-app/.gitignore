@@ -1,0 +1,49 @@
+HELP.md
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+### VS Code ###
+.vscode/
+
+### アップロード画像 ###
+# products/フォルダ内のすべてのファイルを無視
+/src/main/resources/static/images/products/*
+
+# 既存の画像ファイルは管理対象とする（!で除外ルールを打ち消す）
+!/src/main/resources/static/images/products/american_coffee.webp
+!/src/main/resources/static/images/products/cafe_latte.webp
+!/src/main/resources/static/images/products/cappuccino.webp
+!/src/main/resources/static/images/products/matcha_latte.webp
+!/src/main/resources/static/images/products/no_image.webp
+!/src/main/resources/static/images/products/murakami_no.gif

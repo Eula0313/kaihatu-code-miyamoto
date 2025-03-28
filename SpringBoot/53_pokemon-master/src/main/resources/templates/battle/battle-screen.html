@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>バトル画面</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+  <style>
+    /* 基本アニメーション */
+    .pokemon-damage {
+        animation: damage 0.5s;
+    }
+
+    @keyframes damage {
+        0% { transform: translateX(0); }
+        25% { transform: translateX(-10px); }
+        50% { transform: translateX(10px); }
+        75% { transform: translateX(-5px); }
+        100% { transform: translateX(0); }
+    }
+
+    .hp-bar-transition {
+        transition: width 1s ease-in-out;
+    }
+
+    /* ポケモン画像のスタイル */
+    .pokemon-image {
+        transition: transform 0.3s ease-in-out;
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+    }
+
+    /* バトルログ */
+    .battle-log {
+        height: 150px;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid #e5e7eb;
+        background-color: #ffffff;
+        border-radius: 0.375rem;
+    }
+
+    .battle-log div {
+        margin: 5px 0;
+        padding: 5px;
+        border-bottom: 1px solid #f3f4f6;
+    }
+
+    /* 属性攻撃エフェクト */
+    .fire-attack .pokemon-image {
+        filter: drop-shadow(0 0 10px #ff4444);
+        animation: fire-pulse 0.5s ease-in-out;
+    }
+
+    .water-attack .pokemon-image {
+        filter: drop-shadow(0 0 10px #4444ff);
+        animation: water-wave 0.5s ease-in-out;
+    }
+
+    .grass-attack .pokemon-image {
+        filter: drop-shadow(0 0 10px #44ff44);
+        animation: grass-growth 0.5s ease-in-out;
+    }
+
+    .electric-attack .pokemon-image {
+        filter: drop-shadow(0 0 10px #ffff44);
+        animation: electric-spark 0.5s ease-in-out;
+    }
+
+    .fighting-attack .pokemon-image {
+        filter: drop-shadow(0 0 10px #ff6b4a);
+        animation: fighting-punch 0.5s ease-in-out;
+    }
+
+    .psychic-attack .pokemon-image {
+        filter: drop-shadow(0 0 10px #ff69ff);
+        animation: psychic-wave 0.5s ease-in-out;
+    }
+
+    .steel-attack .pokemon-image {
+        filter: drop-shadow(0 0 10px #c0c0c0);
+        animation: steel-shine 0.5s ease-in-out;
+    }
+
+    /* 属性別アニメーション */
+    @keyframes fire-pulse {
+        0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4444); }
+        50% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff4444); }
+        100% { transform: scale(1); filter: drop-shadow(0 0 5px #ff4444); }
+    }
+
+    @keyframes water-wave {
+        0% { transform: translateY(0); filter: drop-shadow(0 0 5px #4444ff); }
+        50% { transform: translateY(-5px); filter: drop-shadow(0 0 20px #4444ff); }
+        100% { transform: translateY(0); filter: drop-shadow(0 0 5px #4444ff); }
+    }
+
+    @keyframes grass-growth {
+        0% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 5px #44ff44); }
+        50% { transform: scale(1.1) rotate(5deg); filter: drop-shadow(0 0 20px #44ff44); }
+        100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 5px #44ff44); }
+    }
+
+    @keyframes electric-spark {
+        0% { filter: drop-shadow(0 0 5px #ffff44) brightness(1); }
+        25% { filter: drop-shadow(0 0 20px #ffff44) brightness(1.5); }
+        50% { filter: drop-shadow(0 0 5px #ffff44) brightness(1); }
+        75% { filter: drop-shadow(0 0 20px #ffff44) brightness(1.5); }
+        100% { filter: drop-shadow(0 0 5px #ffff44) brightness(1); }
+    }
+
+    @keyframes fighting-punch {
+        0% { transform: translateX(0) rotate(0deg); filter: drop-shadow(0 0 5px #ff6b4a); }
+        25% { transform: translateX(-5px) rotate(-5deg); filter: drop-shadow(0 0 20px #ff6b4a); }
+        75% { transform: translateX(15px) rotate(5deg); filter: drop-shadow(0 0 20px #ff6b4a); }
+        100% { transform: translateX(0) rotate(0deg); filter: drop-shadow(0 0 5px #ff6b4a); }
+    }
+
+    @keyframes psychic-wave {
+        0% { transform: scale(1); filter: drop-shadow(0 0 5px #ff69ff) hue-rotate(0deg); }
+        50% { transform: scale(1.1); filter: drop-shadow(0 0 20px #ff69ff) hue-rotate(180deg); }
+        100% { transform: scale(1); filter: drop-shadow(0 0 5px #ff69ff) hue-rotate(360deg); }
+    }
+
+    @keyframes steel-shine {
+        0% { filter: drop-shadow(0 0 5px #c0c0c0) brightness(1); transform: scale(1); }
+        50% { filter: drop-shadow(0 0 20px #ffffff) brightness(1.5); transform: scale(0.95); }
+        100% { filter: drop-shadow(0 0 5px #c0c0c0) brightness(1); transform: scale(1); }
+    }
+
+    /* ダメージエフェクト */
+    .pokemon-damage .pokemon-image {
+        animation: damage-shake 0.5s ease-in-out;
+    }
+
+    @keyframes damage-shake {
+        0% { transform: scale(1); opacity: 1; }
+        25% { transform: scale(0.95) rotate(-5deg); opacity: 0.7; }
+        75% { transform: scale(0.95) rotate(5deg); opacity: 0.7; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* HPバーの色変化 */
+    .hp-bar-high {
+        @apply bg-green-500;
+    }
+
+    .hp-bar-medium {
+        @apply bg-yellow-500;
+    }
+
+    .hp-bar-low {
+        @apply bg-red-500;
+    }
+
+    /* バトル結果エフェクト */
+    .winner-effect {
+        animation: winner-glow 2s infinite;
+    }
+
+    @keyframes winner-glow {
+        0% { box-shadow: 0 0 5px gold; }
+        50% { box-shadow: 0 0 20px gold; }
+        100% { box-shadow: 0 0 5px gold; }
+    }
+
+    /* バトルボタンホバーエフェクト */
+    .battle-button:hover {
+        animation: button-pulse 1s infinite;
+    }
+
+    @keyframes button-pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+        100% { transform: scale(1); }
+    }
+
+    /* エフェクトのオーバーレイ用コンテナ */
+.battle-field-overlay {
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+pointer-events: none;
+z-index: 1000;
+opacity: 0;
+transition: opacity 0.3s;
+}
+
+/* 属性別のオーバーレイエフェクト */
+.fire-field {
+background: radial-gradient(circle, rgba(255,0,0,0) 0%, rgba(255,69,0,0.2) 100%);
+animation: fire-field-effect 1s ease-out;
+}
+
+.water-field {
+background: radial-gradient(circle, rgba(0,0,255,0) 0%, rgba(0,105,255,0.2) 100%);
+animation: water-field-effect 1s ease-out;
+}
+
+.grass-field {
+background: radial-gradient(circle, rgba(0,255,0,0) 0%, rgba(34,139,34,0.2) 100%);
+animation: grass-field-effect 1s ease-out;
+}
+
+.electric-field {
+background: linear-gradient(to bottom, rgba(255,255,0,0.2), transparent);
+animation: electric-field-effect 1s ease-out;
+}
+
+.fighting-field {
+background: radial-gradient(circle, rgba(255,69,0,0) 0%, rgba(178,34,34,0.2) 100%);
+animation: fighting-field-effect 1s ease-out;
+}
+
+.psychic-field {
+background: radial-gradient(circle, rgba(255,105,180,0) 0%, rgba(186,85,211,0.2) 100%);
+animation: psychic-field-effect 1s ease-out;
+}
+
+.steel-field {
+background: radial-gradient(circle, rgba(192,192,192,0) 0%, rgba(169,169,169,0.2) 100%);
+animation: steel-field-effect 1s ease-out;
+}
+
+/* フィールドエフェクトのアニメーション */
+@keyframes fire-field-effect {
+0% {
+    opacity: 0;
+    backdrop-filter: brightness(1);
+}
+50% {
+    opacity: 1;
+    backdrop-filter: brightness(1.3) contrast(1.2);
+}
+100% {
+    opacity: 0;
+    backdrop-filter: brightness(1);
+}
+}
+
+@keyframes water-field-effect {
+0% {
+    opacity: 0;
+    transform: translateY(100%);
+}
+50% {
+    opacity: 1;
+    transform: translateY(0);
+    backdrop-filter: hue-rotate(180deg);
+}
+100% {
+    opacity: 0;
+    transform: translateY(-100%);
+}
+}
+
+@keyframes grass-field-effect {
+0% {
+    opacity: 0;
+    clip-path: circle(0% at center);
+}
+50% {
+    opacity: 1;
+    clip-path: circle(100% at center);
+}
+100% {
+    opacity: 0;
+    clip-path: circle(150% at center);
+}
+}
+
+@keyframes electric-field-effect {
+0%, 20%, 40%, 60%, 80% {
+    opacity: 0;
+    backdrop-filter: contrast(1.5) brightness(1.2);
+}
+10%, 30%, 50%, 70%, 90% {
+    opacity: 1;
+    backdrop-filter: contrast(2) brightness(1.5);
+}
+100% {
+    opacity: 0;
+    backdrop-filter: contrast(1) brightness(1);
+}
+}
+
+@keyframes fighting-field-effect {
+0% {
+    opacity: 0;
+    transform: scale(0.8);
+}
+50% {
+    opacity: 1;
+    transform: scale(1.1);
+    backdrop-filter: saturate(1.5) contrast(1.2);
+}
+100% {
+    opacity: 0;
+    transform: scale(1);
+}
+}
+
+@keyframes psychic-field-effect {
+0% {
+    opacity: 0;
+    backdrop-filter: hue-rotate(0deg);
+}
+50% {
+    opacity: 1;
+    backdrop-filter: hue-rotate(180deg) saturate(1.5);
+}
+100% {
+    opacity: 0;
+    backdrop-filter: hue-rotate(360deg);
+}
+}
+
+@keyframes steel-field-effect {
+0% {
+    opacity: 0;
+    backdrop-filter: grayscale(0);
+}
+50% {
+    opacity: 1;
+    backdrop-filter: grayscale(1) brightness(1.5);
+}
+100% {
+    opacity: 0;
+    backdrop-filter: grayscale(0);
+}
+}
+
+
+  </style>
+</head>
+<body class="bg-gray-100">
+<!-- body直後に追加 -->
+<div id="field-effect-overlay" class="battle-field-overlay"></div>
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-3xl font-bold text-center mb-8">ポケモンバトル</h1>
+
+  <!-- エラーメッセージ -->
+  <div th:if="${error}" class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
+    <span class="block sm:inline" th:text="${error}"></span>
+  </div>
+
+  <div class="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <!-- バトルフィールド -->
+    <div class="flex justify-between p-6 bg-gradient-to-r from-blue-50 to-green-50">
+      <!-- ポケモン1 -->
+      <div class="w-1/2 p-4" id="pokemon1-container">
+        <div class="bg-white rounded-lg p-4 shadow">
+          <!-- ポケモン画像 -->
+          <div class="mb-4 flex justify-center">
+            <img th:src="@{/images/{name}.png(name=${battleData.pokemon1.name.toLowerCase()})}"
+                 th:alt="${battleData.pokemon1.name}"
+                 class="w-32 h-32 object-contain pokemon-image"
+                 th:data-pokemon-name="${battleData.pokemon1.name}"
+                 onerror="this.onerror=null; handlePokemonImage(this);"/>
+          </div>
+          <!-- ポケモン情報 -->
+          <h2 class="text-xl font-bold mb-2" th:text="${battleData.pokemon1.name}" id="pokemon1-name">ポケモン1</h2>
+          <div class="mb-2">
+            <div class="text-sm text-gray-600">HP</div>
+            <div class="w-full bg-gray-200 rounded-full h-4">
+              <div class="bg-green-600 h-4 rounded-full hp-bar-transition" id="pokemon1-hp-bar"
+                   th:style="'width: ' + ${battleData.pokemon1.currentHp * 100 / battleData.pokemon1.maxHp} + '%'"></div>
+            </div>
+            <div class="text-right text-sm">
+              <span id="pokemon1-current-hp" th:text="${battleData.pokemon1.currentHp}"></span>
+              <span>/</span>
+              <span id="pokemon1-max-hp" th:text="${battleData.pokemon1.maxHp}"></span>
+            </div>
+          </div>
+          <div class="text-sm">
+            <p>タイプ: <span class="type-text" th:text="${battleData.pokemon1.typeName}">タイプ</span></p>
+            <p>技: <span id="pokemon1-move" th:text="${battleData.pokemon1.moveName + ' (威力: ' + battleData.pokemon1.movePower + ')'}">技</span></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- VS -->
+      <div class="flex items-center">
+        <span class="text-2xl font-bold">VS</span>
+      </div>
+
+      <!-- ポケモン2 -->
+      <div class="w-1/2 p-4" id="pokemon2-container">
+        <div class="bg-white rounded-lg p-4 shadow">
+          <!-- ポケモン画像 -->
+          <div class="mb-4 flex justify-center">
+            <img th:src="@{/images/{name}.png(name=${battleData.pokemon2.name.toLowerCase()})}"
+                 th:alt="${battleData.pokemon2.name}"
+                 class="w-32 h-32 object-contain pokemon-image"
+                 th:data-pokemon-name="${battleData.pokemon2.name}"
+                 onerror="this.onerror=null; handlePokemonImage(this);"/>
+          </div>
+          <!-- ポケモン情報 -->
+          <h2 class="text-xl font-bold mb-2" th:text="${battleData.pokemon2.name}" id="pokemon2-name">ポケモン2</h2>
+          <div class="mb-2">
+            <div class="text-sm text-gray-600">HP</div>
+            <div class="w-full bg-gray-200 rounded-full h-4">
+              <div class="bg-green-600 h-4 rounded-full hp-bar-transition" id="pokemon2-hp-bar"
+                   th:style="'width: ' + ${battleData.pokemon2.currentHp * 100 / battleData.pokemon2.maxHp} + '%'"></div>
+            </div>
+            <div class="text-right text-sm">
+              <span id="pokemon2-current-hp" th:text="${battleData.pokemon2.currentHp}"></span>
+              <span>/</span>
+              <span id="pokemon2-max-hp" th:text="${battleData.pokemon2.maxHp}"></span>
+            </div>
+          </div>
+          <div class="text-sm">
+            <p>タイプ: <span class="type-text" th:text="${battleData.pokemon2.typeName}">タイプ</span></p>
+            <p>技: <span id="pokemon2-move" th:text="${battleData.pokemon2.moveName + ' (威力: ' + battleData.pokemon2.movePower + ')'}">技</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- バトルログ -->
+    <div class="p-4 border-t border-gray-200">
+      <div id="battle-log" class="battle-log"></div>
+    </div>
+
+    <!-- バトル開始ボタン -->
+    <div class="p-6 bg-gray-50 border-t">
+      <form id="battle-form">
+        <input type="hidden" name="trainer1Id" th:value="${battleData.trainer1Id}">
+        <input type="hidden" name="trainer2Id" th:value="${battleData.trainer2Id}">
+        <div class="flex justify-center">
+          <button type="button" id="battle-button"
+                  class="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-full focus:outline-none focus:shadow-outline transform transition hover:scale-105">
+            バトル開始！
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- 戻るリンク -->
+  <div class="text-center mt-4">
+    <a href="/battle/select" class="text-blue-500 hover:text-blue-800">
+      ← トレーナー選択に戻る
+    </a>
+  </div>
+</div>
+
+<script th:inline="javascript">
+  // ポケモン名と画像ファイル名のマッピング
+  const pokemonImageMap = {
+      'フシギダネ': 'bulbasaur',
+      'ヒトカゲ': 'charmander',
+      'イシツブテ': 'geodude',
+      'ポッポ': 'pidgey',
+      'ピカチュウ': 'pikachu',
+      'ゼニガメ': 'squirtle'
+  };
+
+  // 画像のエラーハンドリング関数
+  function handlePokemonImage(imgElement) {
+      const pokemonName = imgElement.dataset.pokemonName;
+      const englishName = pokemonImageMap[pokemonName];
+      if (englishName) {
+          imgElement.src = `/images/${englishName}.png`;
+      } else {
+          imgElement.src = '/images/default.png';
+      }
+  }
+
+  document.getElementById('battle-button').addEventListener('click', async function() {
+      this.disabled = true;
+      this.classList.add('opacity-50', 'cursor-not-allowed');
+      const trainer1Id = document.querySelector('input[name="trainer1Id"]').value;
+      const trainer2Id = document.querySelector('input[name="trainer2Id"]').value;
+
+      try {
+          const response = await fetch('/battle/execute', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded',
+              },
+              body: `trainer1Id=${trainer1Id}&trainer2Id=${trainer2Id}`
+          });
+
+          if (!response.ok) {
+              throw new Error('バトル実行中にエラーが発生しました');
+          }
+
+          const result = await response.json();
+          await animateBattle(result);
+      } catch (error) {
+          console.error('Error:', error);
+          document.getElementById('battle-log').innerHTML += `
+              <div class="text-red-600">${error.message}</div>
+          `;
+          this.disabled = false;
+          this.classList.remove('opacity-50', 'cursor-not-allowed');
+      }
+  });
+
+  const typeAnimationMap = {
+      '炎': 'fire-attack',
+      '水': 'water-attack',
+      '草': 'grass-attack',
+      '電': 'electric-attack',
+      '闘': 'fighting-attack',
+      '超': 'psychic-attack',
+      '鋼': 'steel-attack'
+  };
+
+async function animateBattle(result) {
+  const battleLog = document.getElementById('battle-log');
+  const overlay = document.getElementById('field-effect-overlay');  // オーバーレイ要素の取得
+  const turns = result.battleLog.split('\n').filter(log => log.trim() !== '');
+
+  for (const turn of turns) {
+      if (turn.includes('勝利')) {
+          battleLog.innerHTML += `<div class="text-green-600 font-bold">${turn}</div>`;
+          await new Promise(resolve => setTimeout(resolve, 1500));
+          window.location.href = '/battle/battle-result';
+          return;
+      }
+
+      const attackerName = turn.split('の')[0];
+      const isFirstPokemonAttacking = attackerName === document.getElementById('pokemon1-name').textContent;
+
+      const attackerId = isFirstPokemonAttacking ? 'pokemon1-container' : 'pokemon2-container';
+      const targetId = isFirstPokemonAttacking ? 'pokemon2-container' : 'pokemon1-container';
+      const attackerType = isFirstPokemonAttacking ?
+          document.querySelector('#pokemon1-container .type-text').textContent :
+          document.querySelector('#pokemon2-container .type-text').textContent;
+
+      const attackerElement = document.getElementById(attackerId);
+      const targetElement = document.getElementById(targetId);
+
+      // 攻撃アニメーションとフィールドエフェクト
+      const animationClass = typeAnimationMap[attackerType] || '';
+      if (animationClass) {
+          // ポケモンのアニメーション
+          attackerElement.classList.add(animationClass);
+
+          // フィールドエフェクト
+          const fieldClass = animationClass.replace('attack', 'field');
+          overlay.className = 'battle-field-overlay ' + fieldClass;
+          overlay.style.opacity = '1';
+
+          await new Promise(resolve => setTimeout(resolve, 1000));
+
+          // エフェクトの終了
+          attackerElement.classList.remove(animationClass);
+          overlay.style.opacity = '0';
+          await new Promise(resolve => setTimeout(resolve, 300));
+          overlay.className = 'battle-field-overlay';
+      }
+
+      // ダメージアニメーション
+      targetElement.classList.add('pokemon-damage');
+      await new Promise(resolve => setTimeout(resolve, 500));
+      targetElement.classList.remove('pokemon-damage');
+
+      // HPの更新
+      const damage = parseInt(turn.match(/\d+/)[0]);
+      const targetHpId = isFirstPokemonAttacking ? 'pokemon2-current-hp' : 'pokemon1-current-hp';
+      const targetHpBarId = isFirstPokemonAttacking ? 'pokemon2-hp-bar' : 'pokemon1-hp-bar';
+
+      const currentHpElement = document.getElementById(targetHpId);
+      const newHp = Math.max(0, parseInt(currentHpElement.textContent) - damage);
+      const maxHp = parseInt(document.getElementById(targetId.replace('container', 'max-hp')).textContent);
+      const newHpPercentage = (newHp / maxHp) * 100;
+
+      currentHpElement.textContent = newHp;
+      document.getElementById(targetHpBarId).style.width = `${newHpPercentage}%`;
+
+      // バトルログの更新
+      battleLog.innerHTML += `<div>${turn}</div>`;
+      battleLog.scrollTop = battleLog.scrollHeight;
+
+      // ターン間の待機
+      await new Promise(resolve => setTimeout(resolve, 1500));
+  }
+}
+</script>
+</body>
+</html>

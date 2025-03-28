@@ -1,0 +1,126 @@
+/* style.css */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f0f0f0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #FF0000;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus, select:focus {
+    outline: none;
+    border-color: #FF0000;
+    box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+button, input[type="submit"] {
+    display: block;
+    margin: 20px auto;
+    background-color: #FF0000;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover, input[type="submit"]:hover {
+    background-color: #CC0000;
+}
+
+.trainer-preview {
+    display: flex;
+    justify-content: center; /* 中央揃え */
+    align-items: center;
+    gap: 50px; /* 間隔を調整 */
+    margin-bottom: 30px;
+}
+
+.trainer-preview img {
+    display: block;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.trainer-image {
+    width: 120px;
+    height: 120px;
+    border: 3px solid #FF0000;
+}
+
+.pokemon-image {
+    width: 80px;
+    height: 80px;
+    border: 2px solid #0000FF;
+}
+
+.trainer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 中央揃え */
+    gap: 10px; /* ラベルと画像の間隔を調整 */
+}
+
+.trainer-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.complete-message {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.back-button {
+    display: inline-block;
+    background-color: #666;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: #444;
+}

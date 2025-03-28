@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<!--IntelliJ IDEA Community Editionではthymeleaf警告が出る。無視してOK-->
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>相関項目チェック（Validatorインターフェース利用）</title>
+</head>
+<body>
+<h1>パスワードの一致チェック</h1>
+<form th:action="@{/check}" th:object="${sampleForm}" method="post">
+    <p>パスワード　<input type="password" th:field="*{password}"></p>
+    <p>確認用パスワード　<input type="password" th:field="*{confirmPassword}"></p>
+    <ul th:if="${#fields.hasErrors('*')}">
+        <li th:each="err:${#fields.errors('*')}" th:text="${err}" style="color: red;"></li>
+    </ul>
+    <p><input type="submit" value="チェック"></p>
+</form>
+</body>
+</html>

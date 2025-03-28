@@ -1,0 +1,74 @@
+<!-- src/main/resources/templates/admin/products/product-index.html -->
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品管理</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="bg-gray-100">
+<div class="flex h-screen">
+    <!-- サイドバーをインクルード -->
+    <div th:replace="~{admin/layout/sidebar :: sidebar}"></div>
+
+    <!-- メインコンテンツ -->
+    <div class="flex-1 ml-64 p-8">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">商品一覧</h2>
+            <a href="/admin/products/create" class="btn-primary">新規商品登録</a>
+        </div>
+        <p th:if="${error}" th:text="${error}"></p>
+        <p th:if="${complete}" th:text="${complete}"></p>
+        <div class="bg-white rounded-lg shadow overflow-hidden">
+            <table class="min-w-full">
+                <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">画像</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">商品名</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">説明</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">価格</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">サイズ</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ステータス</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">操作</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-200">
+                <tr th:each="product : ${products}">
+                    <td class="px-6 py-4" th:text="${product.id}"></td>
+                    <td class="px-6 py-4">
+                        <img th:if="${product.imageUrl != null && !product.imageUrl.isEmpty()}"
+                             th:src="${product.imageUrl}"
+                             alt="商品画像"
+                             class="h-16 w-16 object-cover">
+                        <img th:if="${product.imageUrl == null || product.imageUrl.isEmpty()}"
+                             th:src="'/images/products/no_image.webp'"
+                             alt="デフォルト画像"
+                             class="h-16 w-16 object-cover">
+                    </td>
+                    <td class="px-6 py-4" th:text="${product.name}"></td>
+                    <td class="px-6 py-4" th:text="${product.description}"></td>
+                    <td class="px-6 py-4" th:text="${'¥' + #numbers.formatDecimal(product.price, 0, 'COMMA', 0, 'POINT')}"></td>
+                    <td class="px-6 py-4" th:text="${product.size != null ? product.size.name() : '指定なし'}"></td>
+                    <td class="px-6 py-4">
+                        <span th:if="${product.isAvailable}" class="px-2 py-1 text-sm text-green-800 bg-green-100 rounded-full">販売中</span>
+                        <span th:unless="${product.isAvailable}" class="px-2 py-1 text-sm text-red-800 bg-red-100 rounded-full">停止中</span>
+                    </td>
+                    <td class="px-6 py-4 space-x-2">
+                        <a th:href="@{/admin/products/edit/{id}(id=${product.id})}" class="text-blue-600 hover:text-blue-800">編集</a>
+                        <form th:action="@{/admin/products/delete/{id}(id=${product.id})}" method="post" class="inline">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="text-red-600 hover:text-red-800" onclick="return confirm('本当に削除しますか？')">削除</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="/js/admin.js"></script>
+</body>
+</html>

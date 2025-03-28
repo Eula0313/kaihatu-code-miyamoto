@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Login Success</title>
+</head>
+<body>
+<h2>ログインできました</h2>
+<h3>ようこそ！<span th:text="${user_name}"></span>さん</h3>
+<form th:action="@{/index}" method="GET">
+  <input type="submit" value="戻る">
+</form>
+</body>
+</html>

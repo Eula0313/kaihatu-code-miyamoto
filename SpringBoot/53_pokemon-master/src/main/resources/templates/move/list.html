@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>技一覧</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>技一覧</h1>
+<p th:if="${error}" th:text="${error}"></p>
+<p th:if="${complete}" th:text="${complete}"></p>
+<a href="/moves/create">新しい技を作成</a>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>名前</th>
+        <th>威力</th>
+        <th>操作</th>
+    </tr>
+    <tr th:each="move : ${moves}">
+        <td th:text="${move.moveId}"></td>
+        <td th:text="${move.name}"></td>
+        <td th:text="${move.power}"></td>
+        <td>
+            <form th:action="@{'/moves/edit/' + ${move.moveId}}" method="get" style="display:inline;">
+                <button type="submit">編集</button>
+            </form>
+            <form th:action="@{'/moves/delete/' + ${move.moveId}}" method="post" style="display:inline;">
+                <button type="submit">削除</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

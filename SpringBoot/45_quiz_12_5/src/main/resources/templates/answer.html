@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>「〇xクイズ」アプリ：解答</title>
+</head>
+<body>
+<h1>「〇xクイズ」アプリ：解答</h1>
+<h2 th:text="${msg}" style="color:red">メッセージ表示領域</h2>
+<a th:href="@{/quiz/play}">リプレイ</a><br>
+<a th:href="@{/quiz}">CRUD画面へ</a>
+</body>
+</html>

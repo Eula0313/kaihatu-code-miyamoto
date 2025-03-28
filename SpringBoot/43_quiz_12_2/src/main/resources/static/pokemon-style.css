@@ -1,0 +1,116 @@
+body {
+    background-color: #f0f8ff;
+    background-image:
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/78023852b48998ab5681e1bdc0d6333a.png'), /* ピチュー */
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/89953014f442146518ef45787d9bb0a4.png'), /* ヒトカゲ */
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/17388b7f608671656716ab509ee0fa05.png'), /* ゼニガメ */
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/7b705082db2e24dd4ba25166dac84e0a.png'), /* フシギダネ */
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/5bb0cfd44302cd4df0c0c88d37457931.png'), /* ピカチュウ */
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/f11e83606acc0f5a7aa3b7235a373087.png'), /* リザード */
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/7c861520e0eb69f872a4e13a9f04eaba.png'), /* カメール */
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/6f8144eb4659537733b930d6a299d5a7.png'), /* フシギソウ */
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/b044779bd695701e03dd7b3bc83421e9.png'), /* ライチュウ */
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/42062cbeca16839af3efe8a7d61ceb27a30f758b.png'), /* リザードン */
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/81d2cf3830b75053da5b39dc22aa9a27.png'), /* カメックス */
+        url('https://zukan.pokemon.co.jp/zukan-api/up/images/index/ebccfe6f2ccfe2e851fd29739bf6220c.png'); /* フシギバナ */
+    background-position:
+        10% 20%, /* ピカチュウ: 左上 */
+        35% 20%, /* ヒトカゲ: 右上 */
+        65% 20%, /* ゼニガメ: 左下 */
+        90% 20%, /* フシギダネ: 右下 */
+        10% 55%, /* ピカチュウ: 左上 */
+        35% 55%, /* ヒトカゲ: 右上 */
+        65% 55%, /* ゼニガメ: 左下 */
+        90% 55%, /* フシギダネ: 右下 */
+        10% 90%, /* ピカチュウ: 左上 */
+        35% 90%, /* ヒトカゲ: 右上 */
+        65% 90%, /* ゼニガメ: 左下 */
+        90% 90%; /* フシギダネ: 右下 */
+    background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+    background-size: 200px; /* 各画像のサイズ設定 */
+    background-attachment: fixed; /* スクロールに追従する */
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    color: #333;
+    filter: grayscale(50%); /* 透かしとグレーアウトの効果 */
+}
+
+/* フォームの中央揃えとデザイン */
+form {
+    background-color: #fff;
+    border: 3px solid #ffca28; /* ポケモンカラー */
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 500px;
+    margin: 0 auto 30px auto;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    opacity: 0.96;
+}
+
+/* テーブルを中央に配置し、ポケモン風の背景色を追加 */
+table {
+    width: 80%;
+    margin: 0 auto; /* テーブルを中央に配置 */
+    border-collapse: collapse;
+    background-color: #ffefd5; /* ポケモンの明るいテーマ色 */
+    border: 2px solid #ffca28; /* 黄色の枠線 */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0.96;
+}
+
+/* テーブルヘッダー */
+th {
+    padding: 10px;
+    background-color: #ffca28; /* 明るい黄色 */
+    color: #333;
+    font-weight: bold;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+/* テーブルのセル */
+td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+    color: #333;
+}
+
+/* ボタンのスタイル */
+input[type="submit"], .edit-button, .delete-button {
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+input[type="submit"]:hover, .edit-button:hover, .delete-button:hover {
+    background-color: #ffa500;
+}
+
+/* 編集・削除ボタンの配置 */
+.edit-button, .delete-button {
+    width: 80%;
+    margin: 5px auto;
+    display: inline-block;
+}
+
+/* タイトルのスタイル */
+h1, h3 {
+    color: #ff4500;
+    text-shadow: 2px 2px #ffa500;
+    text-align: center;
+}
+
+/* ラベルのスタイル */
+label {
+    color: #2e8b57;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+}

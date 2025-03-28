@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ポケモンバトルシーン</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            background-image: linear-gradient(45deg, #f3f9ff 25%, transparent 25%),
+                            linear-gradient(-45deg, #f3f9ff 25%, transparent 25%),
+                            linear-gradient(45deg, transparent 75%, #f3f9ff 75%),
+                            linear-gradient(-45deg, transparent 75%, #f3f9ff 75%);
+            background-size: 20px 20px;
+        }
+
+        .battle-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+        }
+
+        /* VS演出のオーバーレイ */
+        .vs-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeOut 1s ease-out 3s forwards;
+        }
+
+        .vs-container {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .character {
+            position: absolute;
+            width: 250px;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .character img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 50%;
+        }
+
+        .character-left {
+            left: 20%;
+            transform: skew(10deg);
+            animation: slideFromLeft 0.5s ease-out;
+        }
+
+        .character-right {
+            right: 20%;
+            transform: skew(-10deg);
+            animation: slideFromRight 0.5s ease-out;
+        }
+
+        .vs-text {
+            position: absolute;
+            font-size: 120px;
+            font-weight: bold;
+            color: white;
+            text-shadow:
+                0 0 10px rgba(255,255,255,0.5),
+                0 0 20px #FF0000,
+                0 0 30px #FF0000;
+            animation: vsFlash 2s infinite;
+            z-index: 1001;
+        }
+
+        .slash {
+            position: absolute;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, transparent, white, transparent);
+            transform: rotate(15deg);
+            animation: slashEffect 0.3s ease-out;
+        }
+
+        /* 既存のスタイル */
+        .battle-header {
+            margin-bottom: 30px;
+        }
+
+        .trainer-vs-trainer {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .trainer {
+            text-align: center;
+        }
+
+        .trainer img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid #FF0000;
+        }
+
+        .trainer-name {
+            font-size: 1.5em;
+            margin-top: 10px;
+            color: #333;
+        }
+
+        .pokemon {
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .pokemon img {
+            width: 120px;
+            height: 120px;
+        }
+
+        .hp-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .hp {
+            height: 100%;
+            background-color: #FF0000;
+            transition: width 0.3s ease-out;
+        }
+
+        .battle-controls {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .control-button {
+            background-color: #FF0000;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .control-button:hover {
+            background-color: #CC0000;
+        }
+
+        .battle-log {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 30px;
+            height: 150px;
+            overflow-y: auto;
+            text-align: left;
+            font-size: 0.9em;
+        }
+
+        @keyframes slideFromLeft {
+            from { transform: translateX(-100%) skew(10deg); }
+            to { transform: translateX(0) skew(10deg); }
+        }
+
+        @keyframes slideFromRight {
+            from { transform: translateX(100%) skew(-10deg); }
+            to { transform: translateX(0) skew(-10deg); }
+        }
+
+        @keyframes vsFlash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes slashEffect {
+            from { transform: rotate(15deg) scaleX(0); }
+            to { transform: rotate(15deg) scaleX(1); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; visibility: visible; }
+            to { opacity: 0; visibility: hidden; }
+        }
+    </style>
+</head>
+<body>
+<!-- VS演出のオーバーレイ -->
+<div class="vs-overlay">
+    <div class="vs-container">
+        <div class="character character-left">
+            <div class="trainer-name">サトシ</div>
+            <img src="https://i.pinimg.com/736x/67/53/aa/6753aad71ea75d2eab4cf6ce4a755d84.jpg" alt="サトシ">
+        </div>
+        <div class="vs-text">VS</div>
+        <div class="slash"></div>
+        <div class="character character-right">
+            <div class="trainer-name">カスミ</div>
+            <img src="https://www.pokemon.co.jp/ex/pika_vee/character/images/thumb_05_active.png" alt="カスミ">
+        </div>
+    </div>
+</div>
+
+<div class="battle-container">
+    <div class="battle-header">
+        <h1>バトルシーン</h1>
+        <p>サトシ vs カスミ</p>
+    </div>
+
+    <div class="trainer-vs-trainer">
+        <div class="trainer">
+            <img src="https://i.pinimg.com/736x/67/53/aa/6753aad71ea75d2eab4cf6ce4a755d84.jpg" alt="サトシ">
+            <div class="trainer-name">サトシ</div>
+            <div class="pokemon">
+                <img src="https://zukan.pokemon.co.jp/zukan-api/up/images/index/5bb0cfd44302cd4df0c0c88d37457931.png" alt="ピカチュウ">
+                <div class="hp-bar">
+                    <div class="hp" style="width: 70%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="trainer">
+            <img src="https://www.pokemon.co.jp/ex/pika_vee/character/images/thumb_05_active.png" alt="カスミ">
+            <div class="trainer-name">カスミ</div>
+            <div class="pokemon">
+                <img src="https://zukan.pokemon.co.jp/zukan-api/up/images/index/6f9a06aa9a178bffd7584e96c2d458e2.png" alt="ヒトデマン">
+                <div class="hp-bar">
+                    <div class="hp" style="width: 50%;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="battle-controls">
+        <button class="control-button">攻撃</button>
+    </div>
+
+    <div class="battle-log">
+        <p>バトルログ:</p>
+        <p>バトル開始！</p>
+        <p>ピカチュウのこうげき！</p>
+        <p>ヒトデマンのこうげき！</p>
+    </div>
+</div>
+</body>
+</html>

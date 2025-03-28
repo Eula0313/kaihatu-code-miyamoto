@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ポケモン編集</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Arial', sans-serif;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1a1a;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .pokemon-card {
+            background-color: #f8f8f8;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .pokemon-info {
+            flex: 1;
+            padding-left: 30px;
+        }
+
+        .pokemon-image {
+            width: 250px;
+            height: 250px;
+            object-fit: contain;
+            border-radius: 10px;
+            background-color: #ffffff;
+            padding: 10px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .pokemon-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2a75bb;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .pokemon-type {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            background-color: #ffcb05;
+            color: #1a1a1a;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+
+        input[type="number"], select {
+            width: 200px;
+            padding: 8px;
+            border: 2px solid #2a75bb;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #2a75bb;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        button:hover {
+            background-color: #1a65ab;
+        }
+
+        .error-list {
+            background-color: #ffebee;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .error-list li {
+            color: #c62828;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>ポケモン編集</h1>
+
+    <div class="pokemon-card">
+        <img id="pokemonImage" class="pokemon-image" th:src="@{/images/placeholder.png}" alt="ポケモン画像">
+        <div class="pokemon-info">
+            <div class="pokemon-name" th:text="*{pokemonForm.name}"></div>
+            <div class="move-element pokemon-type">
+                <span th:each="type : ${types}" th:if="${type.typeId == pokemonForm.typeId}"
+                      th:text="${type.typeNameKanji}"></span>
+            </div>
+            <form th:action="@{/pokemon/edit/{id}(id=${pokemonId})}" method="post" th:object="${pokemonForm}">
+                <input type="hidden" th:field="*{name}" />
+                <input type="hidden" th:field="*{typeId}" />
+                <div class="form-group">
+                    <label>HP:</label>
+                    <input type="number" th:field="*{hp}" />
+                </div>
+
+                <div class="form-group">
+                    <label>攻撃:</label>
+                    <input type="number" th:field="*{attack}" />
+                </div>
+
+                <div class="form-group">
+                    <label>技:</label>
+                    <select th:field="*{moveId}">
+                        <option th:each="move : ${moves}"
+                                th:value="${move.moveId}"
+                                th:text="${move.name}"
+                                th:selected="${move.moveId == pokemonForm.moveId}">
+                        </option>
+                    </select>
+                </div>
+
+                <!-- エラー表示 -->
+                <ul th:if="${#fields.hasErrors('*')}" class="error-list">
+                    <li th:each="err:${#fields.errors('*')}" th:text="${err}"></li>
+                </ul>
+
+                <button type="submit">更新</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script th:inline="javascript">
+    // ポケモンIDと画像名のマッピング
+    const pokemonImages = {
+        1: 'charmander.png',
+        2: 'squirtle.png',
+        3: 'bulbasaur.png',
+        4: 'pikachu.png',
+        5: 'geodude.png',
+        6: 'pidgey.png',
+    };
+
+    // 現在のポケモンIDを取得（Thymeleafから）
+    const pokemonId = /*[[${pokemonId}]]*/ 1;
+
+    // 画像を設定する関数
+    function setPokemonImage(id) {
+        const imageElement = document.getElementById('pokemonImage');
+        const imageName = pokemonImages[id] || 'noImage.png';
+        imageElement.src = `/images/${imageName}`;
+    }
+
+    // ページ読み込み時に画像を設定
+    document.addEventListener('DOMContentLoaded', function() {
+        setPokemonImage(pokemonId);
+    });
+
+
+    // タイプと色のマッピング
+const TYPE_COLORS = {
+    '草': '#7CB342',  // 緑色
+    '炎': '#E64A19',  // 赤色
+    '水': '#1976D2',  // 青色
+    '電': '#FDD835', // 黄色
+    '闘': '#795548', // 茶色
+    '超': '#673AB7' // 濃い紫
+};
+
+// 技の背景色を設定する関数
+function updateMoveBackgroundColor() {
+    // 選択されたタイプを取得
+    const selectedType = document.querySelector('.pokemon-type').textContent.trim();
+    // タイプに対応する色を取得
+    const backgroundColor = TYPE_COLORS[selectedType] || '#BDBDBD';  // デフォルトはグレー
+
+    // 技の要素に背景色を適用
+    const moveElements = document.querySelectorAll('.move-element');
+    moveElements.forEach(element => {
+        element.style.backgroundColor = backgroundColor;
+        // 背景色が暗い場合は文字色を白に
+        const isDark = isColorDark(backgroundColor);
+        element.style.color = isDark ? '#FFFFFF' : '#000000';
+    });
+}
+
+// 色の明るさを判定する補助関数
+function isColorDark(color) {
+    const hex = color.replace('#', '');
+    const r = parseInt(hex.substr(0, 2), 16);
+    const g = parseInt(hex.substr(2, 2), 16);
+    const b = parseInt(hex.substr(4, 2), 16);
+    // YIQ式で明るさを計算
+    const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+    return yiq < 128;
+}
+
+// DOMの準備ができたら実行
+document.addEventListener('DOMContentLoaded', () => {
+    // 初期表示時に色を設定
+    updateMoveBackgroundColor();
+
+    // タイプが変更されたときのイベントリスナー（create.htmlの場合）
+    const typeSelect = document.querySelector('select[name="typeId"]');
+    if (typeSelect) {
+        typeSelect.addEventListener('change', updateMoveBackgroundColor);
+    }
+});
+
+
+
+</script>
+</body>
+</html>
