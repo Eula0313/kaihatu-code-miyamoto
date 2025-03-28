@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>test</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="increment">+1</button>
+        <button @click="decrement">-1</button>
+    {{ ninzu }}人
+    <p>単価を選択してください</p>
+    <input type="radio" v-model="tanka" value="1000" /> 1000
+    <input type="radio" v-model="tanka" value="1500" /> 1500
+    <p>-------------------------</p>
+    <button @click="multiply">合計</button>{{ kei }}円
+    <P v-if="iskei">合計10000円以内としてください</P>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/ex2_script.js"></script>
+</body>
+</html>

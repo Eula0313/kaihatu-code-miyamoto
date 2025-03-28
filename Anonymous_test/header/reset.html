@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>リセット承認</title>
+<style>
+    dialog {
+        border: 1px solid #000; /* 境界線 */
+        padding: 20px; /* パディング */
+        width: 300px; /* 幅 */
+    }
+    .center-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center; /* テキストを中央揃え */
+    }
+</style>
+</head>
+<body>
+
+<button onclick="document.getElementById('myDialog').showModal();">リセット</button>
+
+<dialog id="myDialog">
+    <div class="center-content"></div>
+    <p>本当にリセットしますか？</p>
+    <form method="dialog">
+        <button type="submit" value="confirm">リセット</button>
+        <button type="button" onclick="document.getElementById('myDialog').close();">キャンセル</button>
+    </form>
+</dialog>
+<script>
+    document.getElementById('resetForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        fetch('/reset-database', {
+            method: 'POST'
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert('データベースがリセットされました。');
+            } else {
+                alert('データベースのリセットに失敗しました。');
+            }
+            document.getElementById('myDialog').close();
+        })
+        .catch(error => {
+            console.error('エラー:', error);
+            alert('エラーが発生しました。');
+            document.getElementById('myDialog').close();
+        });
+    });
+</script>
+</body>
+</html>

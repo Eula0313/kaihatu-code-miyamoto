@@ -1,0 +1,70 @@
+body{
+    background-color: #FFFFCC;
+}
+
+
+div{
+    width:500px;
+    margin:10px auto;
+    border:1px soild #000000;
+    text-align: center;
+}
+
+label{
+    display: inline-block;
+    width:100px;
+    text-align:left;
+}
+
+.koumoku{
+box-sizing: border-box;
+
+width: 200px;
+height: 80px;
+left: 136px;
+top: 363px;
+
+background: #FFFFFF;
+border: 1px solid #000000;
+}
+.kensaku{
+border-radius:2px 0 0 2px;	
+background:#eee;
+}
+
+.era{
+    border: 1px solid ;
+    margin: 10px ;
+    padding: 10px ;
+    width: 200px;
+
+    }
+.btn{
+    box-sizing: border-box;
+    width: 100px;
+    height: 30px;
+   
+border-radius:0 2px 2px 0;
+background:#7fbfff;
+border:none;
+color:#fff;
+}
+
+.btn:hover{
+    color:#666;
+    }
+
+table{
+    margin:10px auto;
+    border-collapse: collapse;
+    border: solid 2px #333;
+}
+
+td,th{
+    border:dashed 1px #777;
+
+}
+table th{
+    background-color: azure;
+}
+

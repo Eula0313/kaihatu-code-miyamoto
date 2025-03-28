@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Onest', sans-serif;
+}
+
+:root {
+  --color-white: #fff;
+  --color-1: #350048;
+  --color-2: rgba(255, 255, 255, 0.05);
+  --color-3: rgba(0, 0, 0, 0.2);
+  --color-4: rgba(255, 255, 255, 0.1);
+  --color-gradient-1: rgba(255, 255, 255, 0.15);
+  --green-color: #1eff45;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: black;
+  height: 70px;
+  color: rgb(243, 233, 233);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 1000;
+}
+
+nav h5 {
+  margin: 0;
+  color: rgb(255, 252, 252);
+  padding-left: 140px;
+  font-size: 20px; /* 文字の大きさを指定 */
+}
+
+.nav-buttons {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.nav-buttons .btn {
+  position: relative;
+  width: 155px;
+  height: 50px;
+}
+
+.nav-buttons .btn a {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-2);
+  box-shadow: 0 15px 35px var(--color-3);
+  border-top: 1px solid var(--color-4);
+  border-bottom: 1px solid var(--color-4);
+  border-radius: 30px;
+  color: var(--color-white);
+  z-index: 1;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.8s;
+  backdrop-filter: blur(15px);
+}
+
+.nav-buttons .btn:hover a {
+  letter-spacing: 3px;
+}
+
+.nav-buttons .btn a::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to left, var(--color-gradient-1), transparent);
+  transform: skewX(45deg) translateX(0);
+  transition: 0.8s;
+}
+
+.nav-buttons .btn:hover a::before {
+  transform: skewX(45deg) translateX(200%);
+}
+
+.nav-buttons .btn::before,
+.nav-buttons .btn::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 10px;
+  background: var(--green-color); /* 緑色 */
+  border-radius: 10px;
+  transition: 0.8s;
+  transition-delay: 0s;
+  box-shadow: 0 0 5px var(--green-color),
+              0 0 15px var(--green-color),
+              0 0 30px var(--green-color),
+              0 0 60px var(--green-color);
+}
+
+.nav-buttons .btn:hover::before,
+.nav-buttons .btn:hover::after {
+  height: 50%;
+  width: 80%;
+  border-radius: 30px;
+  transition-delay: 0.5s;
+}
+
+.nav-buttons .btn::before {
+  bottom: -5px;
+}
+
+.nav-buttons .btn::after {
+  top: -5px;
+}
+
+.popup {
+  display: none;
+  position: fixed;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  padding: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 1001;
+  color: white;
+  background-image: url('https://www.yuu-diaryblog.com/wp-content/uploads/2017/10/space-background13.jpg');
+  background-size: cover;
+  background-position: center;
+  overflow-y: auto;
+}
+
+.popup h1, .popup h2, .popup p {
+  background: rgba(0, 0, 0, 0.5);
+  padding: 10px;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 10px;
+  border: none;
+  color: white;
+}
+
+.close-button:hover {
+  color: #ccc;
+}
+
+.center-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.overlay.active, .popup.active {
+  display: block;
+}
+
+/*参加ボタンのcss*/
+@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
+
+.Button-style {
+  font-family: "Modak", cursive;
+  font-size: 20px;
+  display: inline-block;
+  padding: 0.2em 1em 0.1em;
+  color: #ff0066;
+  border: solid 2px #ff0066;
+  border-radius: 5px;
+  background-color: #fff0f8;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* アニメーションの追加 */
+}
+
+.Button-style:hover {
+  background-color: #ff0066;
+  color: #fff0f8;
+}

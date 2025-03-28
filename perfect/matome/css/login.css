@@ -1,0 +1,165 @@
+.signin {
+    text-align: center;
+}
+
+#loginid {
+    font-size: 32px;
+}
+
+#login-id {
+    height: 20px;
+    width: 250px;
+}
+
+#loginpass {
+    font-size: 32px;
+}
+
+#login-pass {
+    height: 20px;
+    width: 250px;
+}
+
+#login-button {
+    z-index: 5;
+    font-size: 20px;
+    padding: 10px;
+}
+
+.ori {
+    z-index: -1;
+    position: fixed;
+    top: 0px;
+    left: 100px;
+    width: 1250px;
+    height: 852px;
+    flex-shrink: 0;
+}
+
+.jagaimo-2 {
+    z-index: -2;
+    position: fixed;
+    bottom: 600px;
+    left: 150px;
+    width: 160.5px;
+    height: 132.5px;
+    flex-shrink: 0;
+}
+
+.mimizu {
+    z-index: -3;
+    position: fixed;
+    bottom: 150px;
+    left: 200px;
+    width: 192px;
+    height: 252px;
+    flex-shrink: 0;
+}
+
+.yama {
+    z-index: -4;
+    position: fixed;
+    top: -30px;
+    left: 0px;
+    width: 2425.92px;
+    height: 1091.379px;
+    flex-shrink: 0;
+}
+
+.touroku {
+    text-align: center;
+}
+
+body,
+h1,
+p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set a background color */
+body {
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+/* Center the login container */
+.signin {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    max-width: 300px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+
+/* Style the SHINE header */
+.signin h1 {
+    font-size: 48px;
+    color: #333;
+}
+
+/* Style the form elements */
+form {
+    margin-top: 20px;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #555;
+}
+
+form input[type="text"],[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Style the login button 
+#login-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 25px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+#login-button:hover {
+    background-color: #0056b3;
+}
+*/
+/* Style the registration link */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 10px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Style the decorative SVG elements */
+.ori,
+.mimizu,
+.ccc,
+.ddd {
+    margin-top: 30px;
+}
+
+/* Style the SVG paths */
+path {
+    stroke-width: 2;
+}

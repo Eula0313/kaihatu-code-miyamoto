@@ -1,0 +1,103 @@
+/*kanri.php*/
+.cnt {
+    text-align: center;
+    font-size: 24px;
+}
+.right {
+    margin: 0 0 0 auto;
+    font-size: 24px;
+}
+.shohin {
+    display: inline-block; 
+    vertical-align: top; 
+    margin-left: 20px; 
+    font-size: 24px;
+}
+.button {
+    background: red;
+    color: white;
+    font-size: 24px; 
+    padding: 10px 20px; 
+    border: none; 
+    cursor: pointer;
+}
+.moji {
+    display: inline-block; 
+    vertical-align: top; 
+    line-height: 20px;
+    margin-left: 20px; 
+    font-size: 24px;
+}
+
+/*kanri2.php*/
+
+.cnt {
+    text-align: center;
+    font-size: 24px;
+}
+
+.radio_cnt {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+}
+
+.radio {
+    margin-right: 220px; 
+    margin-left:50px;
+}
+.kuhaku{
+    margin-right: 0;
+    margin-left: auto;
+    width: 35%;
+}
+
+.ku {
+    margin-left: 10px; 
+    margin-right: 10px;
+}
+
+
+/*rieki.php*/
+
+.cnt {
+    text-align: center;
+    font-size: 24px;
+}
+
+.radio_cnt {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+}
+
+.radio {
+    margin-right: 220px; 
+    margin-left:50px;
+}
+.kuhaku{
+    margin-right: 0;
+    margin-left: auto;
+    width: 35%;
+}
+
+.ku {
+    margin-left: 10px; 
+    margin-right: 10px;
+}
+
+
+/*rieki.php*/
+
+.shohin {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 20px;
+    font-size: 24px;
+    width: 800px; 
+}
+
+.shohin img {
+    float: left;
+    margin-right: 20px; 
+}

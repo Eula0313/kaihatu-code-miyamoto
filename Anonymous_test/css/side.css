@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 0 5%; /* 左右に少し余白を追加 */
+    background-color: #f0f0f0;
+ }
+ .team-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%; /* 幅を全体に広げる */
+ }
+ .team-box {
+    width: 20%; /* 元の大きさに戻す */
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    color: white; /* テキストの色を白に変更 */
+ }
+ .red-team {
+    background-color: red; /* 背景色を赤に変更 */
+ }
+ .blue-team {
+    background-color: blue; /* 背景色を青に変更 */
+    order: 2; /* 青チームを右側に寄せる */
+ }
+ .photo-container {
+    display: flex;
+    align-items: center;
+ }
+ .team-photo {
+    width: 66.67%; /* コンテナの3分の2の幅に設定 */
+    height: auto;
+    border-radius: 10px;
+ }
+ .number {
+    font-size: 32px; /* 数字のサイズを大きく変更 */
+    margin-left: 10px; /* 数字と画像の間のスペースを追加 */
+    margin-right: 10px; /* 数字と画像の間のスペースを追加 */
+ }
+ .team-info {
+    margin-top: 10px;
+ }
+ 

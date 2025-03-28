@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>4-5</title>
+</head>
+<body>
+    <div id="app">
+        <div class="form-area__name">
+            <p>名前</p>
+            <input type="text" name="name" v-model="name"/>
+            <p v-if="isInValidName" class="error">
+                名前は4文字以上で入力して下さい
+            </p>
+        </div>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/script.js"></script>
+</body>
+</html>

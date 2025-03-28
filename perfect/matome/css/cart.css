@@ -1,0 +1,120 @@
+.product-name {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.product-info {
+display: inline-block;
+vertical-align: top;
+margin-left: 20px;
+font-size: 24px;
+}
+
+hr {
+display: block;
+}
+
+body {
+font-family: Arial, sans-serif;
+background-color: #f8f8f8;
+margin: 0;
+padding: 0;
+}
+
+.cart {
+text-align: center;
+background-color: #333;
+color: #fff;
+padding: 10px 0;
+margin-top: 0;
+}
+
+table {
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
+}
+
+table td {
+padding: 10px;
+border: 1px solid #ddd;
+background-color: #fff;
+}
+
+#osamu {
+    width: 50px;
+}
+
+.product-info {
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+margin-left: 20px;
+}
+
+.product-name {
+font-size: 28px;
+margin-bottom: 10px;
+}
+
+.product-info p {
+font-size: 24px;
+}
+
+.button {
+background-color: #007bff;
+color: #fff;
+border: none;
+padding: 5px 10px;
+margin-right: 5px;
+cursor: pointer;
+}
+
+.button:hover {
+background-color: #0056b3;
+}
+
+.center {
+    width: 200px;
+    height: 50px;
+    display: block;
+    margin: 20px auto;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #000;
+    border: 2px solid #000;
+    background: #fff;
+    font-weight: bold;
+}
+    
+.center:hover {
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;    
+}
+
+.center a {
+    color: white; /* 文字色を白に設定 */
+    text-decoration: none; /* 下線を削除する場合は必要に応じて */
+  }
+
+.price-p {
+    font-size: 24px;
+}
+
+.delete {
+    width: 80px;
+    height: 40px;
+    display: block;
+    margin: 20px auto;
+    border: none;
+    padding: 7px 20px;
+    text-align: center;
+    cursor: pointer;
+    color: #ff0000;
+    border: 2px solid #ff0000;
+    background: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    text-decoration: none;
+}

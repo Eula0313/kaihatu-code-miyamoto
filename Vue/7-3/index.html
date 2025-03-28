@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>7-3</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  </head>
+  <body>
+    <div id="app">
+      <article class="m-6">
+        <section class="columns">
+          <input
+            type="text"
+            name="todo-text"
+            class="input is-primary mr-3"
+            placeholder="please input todo"
+            :value="text"
+            @input="inputText"
+          />
+          <button
+            class="button is-primary"
+            @click="addTodo"
+          >ADD TODO</button>
+        </section>
+        <section class="columns">
+          <div class="column is-half">
+            <p class="title has-text-centered">incomplete items</p>
+            <ul class="card">
+              <li
+                v-for="(item, i) in incompleteTodo"
+                :key="i"
+                class="has-text-right"
+              >
+              <span class="card-content">{{item.text}}</span>
+              <span class="button-area">
+                <button
+                  class="button is-success is-small"
+                  @click="toggleIsDone(item.id)"
+                >DONE</button>
+                <button
+                  class="button is-danger is-small"
+                  @click="deleteTodo(item.id)"
+                >DELETE</button>
+              </span>
+              </li>
+            </ul>
+          </div>
+          <div class="column is-half">
+            <p class="title has-text-centered">complete items</p>
+            <ul class="card">
+              <li
+                v-for="(item, i) in doneTodo"
+                :key="i"
+                class="has-text-right"
+              >
+                <span class="card-content">{{item.text}}</span>
+                <span class="button-area">
+                  <button
+                    class="button is-info is-light is-small"
+                    @click="toggleIsDone(item.id)"
+                    >RETURN</button>
+                  <button
+                    class="button is-danger is-small"
+                    @click="deleteTodo(item.id)"
+                  >DELETE</button>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </section>
+      </article>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/script.js"></script>
+  </body>
+</html>

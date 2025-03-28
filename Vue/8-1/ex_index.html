@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ja">
+ 
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>8-1</title>
+</head>
+ 
+<body>
+    <h1>世界の観光地</h1>
+    <div id="app">
+        <div class="wrap">
+            <image-thumbnail v-for="(img, i) in images" :key="i" :path="img.path" @clickimage="onSelectImage(img.path)"></image-thumbnail>
+           
+            <div v-if="isShown" class="modal" @click="closeModal">
+                <img class="modal-img" :src="selectedImage" alt="selectedImage" />
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/ex_script.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+@charset "utf-8";
+
+.head {
+   background-color: rgb(50, 50, 120);
+}
+
+.head img{
+   vertical-align: middle;
+   display: inline-block;
+}
+
+.head span{
+   color: rgb(255, 255, 255);
+   font-size: 32px;
+   display: inline-block;
+}
+
+.era {
+   color: red;
+}
+
+.kurasu {
+   display: flex;
+}
+.jugyo {
+   margin-left: 30px;
+}
+
+.rikaido{ 
+   border: 1px solid black;
+   width: 400px;
+   margin-left: 30px;
+}
+
+.btn{
+   width: 300px;
+   padding: 5px;
+   margin-left: 30px;
+}
+

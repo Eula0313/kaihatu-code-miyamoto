@@ -1,0 +1,65 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+  }
+  
+  .container {
+    text-align: center;
+  }
+  
+  h1 {
+    text-align: center;
+  }
+
+  .btn-container {
+    text-align: center;
+  }
+  
+  .btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .btn:hover {
+    background-color: #45a049;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+  }
+
+  form {
+    display: inline-block;
+    margin-right: 5px;
+  }
+  
+  #selectFileSample1 {
+    display: none;
+  }
+
+  input.ex {
+    height: 20%;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #888;
+  }
+  

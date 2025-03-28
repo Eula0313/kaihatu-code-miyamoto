@@ -1,0 +1,81 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; 
+    font-size: 18px; 
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    color: #333;
+}
+
+h1 {
+    font-size: 48px; 
+    color: #333;
+    margin-top: 20px;
+}
+
+div.message {
+    font-size: 96px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+button[type="submit"] {
+    width: 200px;
+    height: 50px;
+    display: block;
+    margin: 20px auto;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #000;
+    border: 2px solid #000;
+    background-color: #f0f0f0;
+    font-weight: bold;
+}
+
+button[type="submit"]:hover {
+    background-color: #b8b8b8;
+}
+.ori {
+    z-index: -1;
+    position: fixed;
+    top: 0px;
+    left: 100px;
+    width: 1250px;
+    height: 852px;
+    flex-shrink: 0;
+}
+.jagaimo-2 {
+    z-index: -2;
+    position: fixed;
+    bottom: 600px;
+    left: 150px;
+    width: 160.5px;
+    height: 132.5px;
+    flex-shrink: 0;
+}
+
+.mimizu {
+    z-index: -3;
+    position: fixed;
+    bottom: 100px;
+    left: 100px;
+    width: 192px;
+    height: 252px;
+    flex-shrink: 0;
+}
+
+.yama {
+    z-index: -4;
+    position: fixed;
+    top: -60px;
+    left: -140px;
+    width: 1000.92px;
+    height: 900.379px;
+    flex-shrink: 0;
+}

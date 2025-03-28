@@ -1,0 +1,115 @@
+<?php
+// データベース接続情報を設定します
+$dsn = 'mysql:host=localhost;dbname=yourdatabase;charset=utf8';
+$username = 'yourusername';
+$password = 'yourpassword';
+
+// データベースに接続します
+try {
+    $pdo = new PDO($dsn, $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo 'データベース接続エラー: ' . $e->getMessage();
+    exit();
+}
+
+// データベースからランダムに3つの英単語を選びます
+function getRandomWords($pdo) {
+    // SQLクエリを作成します
+    $sql = 'SELECT word FROM your_word_table ORDER BY RAND() LIMIT 3';
+    
+    // クエリを実行します
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    
+    // 結果を取得します
+    $words = $stmt->fetchAll(PDO::FETCH_COLUMN);
+    
+    return $words;
+}
+
+// 完全なURLを作成します
+function createDynamicUrl($pdo) {
+    // ベースURLを設定します
+    $baseUrl = 'https://codenames.game/room/';
+    
+    // ランダムな英単語を取得します
+    $words = getRandomWords($pdo);
+    
+    // ハイフンで単語を連結します
+    $path = implode('-', $words);
+    
+    // 完全なURLを作成します
+    $fullUrl = $baseUrl . $path;
+    
+    return $fullUrl;
+}
+
+// 動的なURLを作成して表示します
+$dynamicUrl = createDynamicUrl($pdo);
+echo $dynamicUrl;
+?>
+------------------------------------------------------------------
+// データベース接続
+$host = 'localhost';
+$dbname = 'your_db_name';
+$user = 'your_db_user';
+$pass = 'your_db_password';
+$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
+
+try {
+    $pdo = new PDO($dsn, $user, $pass);
+} catch (PDOException $e) {
+    die('Database connection failed: ' . $e->getMessage());
+}
+
+// 3つのランダムな単語を取得
+$query = 'SELECT word FROM words ORDER BY RAND() LIMIT 3';
+$stmt = $pdo->query($query);
+$words = $stmt->fetchAll(PDO::FETCH_COLUMN);
+
+// URLの生成
+$base_url = 'https://Anonymous.game/room/';
+$room_url = $base_url . implode('-', $words);
+
+// クライアントにURLを返す（具体的な方法はサーバーのアーキテクチャによる）
+echo $room_url;
+-------------------------------------------------------------------------------
+4人でカードを裏返す非同期ボードゲームを開発する際に必要な開発環境は、バックエンド、フロントエンド、データベースなど、複数の要素で構成されます。以下に主要な要素と、それぞれの選択肢を紹介します。
+
+バックエンド
+プログラミング言語:
+Node.js、Python、PHP、Ruby、Java、Goなど、サーバーサイドのプログラミング言語の選択肢があります。
+各言語には対応するフレームワークがあります。例：Node.jsの場合、Express.js、Pythonの場合、DjangoやFlaskなど。
+リアルタイム通信:
+ゲームでリアルタイム通信が必要な場合、Socket.IOやWebSocketプロトコルなどのライブラリを使用します。
+サーバー:
+開発中はローカル開発環境でサーバーを設定し、ゲームをテストします。サーバーは開発環境から本番環境へデプロイすることができます。
+本番環境では、ホスティングプロバイダーやクラウドプラットフォームを選択してデプロイすることをおすすめします。
+フロントエンド
+プログラミング言語:
+HTML、CSS、JavaScriptを使用して、ゲームのフロントエンドを作成します。
+JavaScriptフレームワーク:
+フロントエンド開発には、React、Vue.js、AngularなどのJavaScriptフレームワークが役立ちます。
+ユーザーインターフェースのデザイン:
+ゲームのユーザーインターフェースを設計します。デザインツール（例：Figma、Adobe XD）を使用してプロトタイピングを行うことができます。
+データベース
+データベース管理システム:
+ゲームのデータを保存するために、データベースが必要です。選択肢には、MySQL、PostgreSQL、MongoDBなどがあります。
+データベース接続:
+データベース接続のために、バックエンドの言語に対応するドライバやライブラリを使用します。
+バージョン管理
+Git:
+開発プロジェクトを管理し、バージョンをコントロールするためにGitを使用します。
+開発ツール
+統合開発環境（IDE）:
+開発に使用するIDE（例：Visual Studio Code、WebStorm、Atomなど）を選びます。
+デバッグツール:
+ゲーム開発中にバグを追跡し修正するためのデバッグツールを使用します。
+デプロイメントとホスティング
+ホスティングサービス:
+ゲームのサーバーをホスティングするためのクラウドサービス（例：AWS、Azure、Google Cloud Platform、Herokuなど）を選びます。
+チームコラボレーション
+プロジェクト管理ツール:
+チームでの開発をスムーズに進めるために、Trello、Asana、JIRAなどのプロジェクト管理ツールを使用します。
+これらの開発環境を選び、組み合わせてゲームを開発します。各要素については、チームの技術力、好み、プロジェクトのニーズに合わせて選択すると良いでしょう。

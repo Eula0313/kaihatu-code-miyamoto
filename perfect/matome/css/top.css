@@ -1,0 +1,18 @@
+.menu {
+    display: block;
+}
+.menu-name {
+    display: inline-block;
+    font-size: 32px;
+    margin: 0;
+    padding: 0;
+}
+.menu-link {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    margin: auto;
+}

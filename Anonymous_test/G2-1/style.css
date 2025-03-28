@@ -1,0 +1,659 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#game-board {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+}
+
+.card {
+    width: 100px;
+    height: 90px;
+    display: inline-block;
+    margin: 5px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100px;
+    color: #FFD700; /* ゴールド */
+    background-color:#0f3460;
+    font-weight: bold;
+    border: 2px solid #00CED1; /* ディープスカイブルー */
+    border-radius: 10px; /* 角を少し丸める */
+    cursor: pointer;
+    background-size: cover;
+    box-shadow: 0 0 10px rgba(0, 206, 209, 0.7), inset 0 0 10px rgba(255, 255, 255, 0.5); /* 外側と内側に光を追加 */
+    -webkit-text-stroke: 0.375px #000000;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+.hint-input, .end-turn, #hint-display {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.counts {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    z-index: 999;
+}
+ 
+.overlay.active {
+    display: block;
+}
+ 
+.flippopup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1a1a1a;
+    border: 2px solid #00ff99;
+    padding: 20px;
+    z-index: 1000;
+    display: none;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 153, 0.7);
+}
+ 
+.flippopup.active {
+    display: block;
+}
+ 
+.flippopup button {
+    background: #00ff99;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    color: #1a1a1a;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+ 
+.flippopup button:hover {
+    background: #00cc77;
+}
+
+.winred-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1a1a1a;
+    border: 2px solid #ff0000;
+    padding: 20px;
+    z-index: 1000;
+    display: none;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgb(255, 0, 0);
+}
+ 
+.winred-popup.active {
+    display: block;
+}
+ 
+.winred-popup button {
+    background: #ff0000;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    color: #1a1a1a;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+ 
+.winred-popup button:hover {
+    background: #cc0000;
+}
+ 
+ 
+.winblue-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1a1a1a;
+    border: 2px solid #005eff;
+    padding: 20px;
+    z-index: 1000;
+    display: none;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #005eff;
+}
+ 
+.winblue-popup.active {
+    display: block;
+}
+ 
+.winblue-popup button {
+    background: #005eff;
+    border: none;
+    padding: 10px 20px;
+    margin: 10px;
+    color: #1a1a1a;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s;
+}
+ 
+.winblue-popup button:hover {
+    background: #2200ff;
+}
+
+.hidden {
+    display: none;
+}
+
+
+.red-team {
+    background-color: #ff4c4c;
+ }
+ 
+ .blue-team {
+    background-color: #4c4cff;
+ }
+ /* G1-3ver2.0.css */
+.Name {
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100%; /* 幅を100%に設定 */
+    text-align: center;
+    z-index: 100; /* テキストが星の上に表示されるようにするための設定 */
+ }
+ 
+ .namebox {
+    text-align: center;
+    display: inline-block; /* インラインブロック要素に変更 */
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+ }
+
+ .container {
+    margin: AUTO;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 140px; /* 上部のマージンを追加 */
+ }
+ 
+ .team-box {
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    height: 280px;
+    width:  224px;
+ }
+ 
+ 
+ .red-team {
+    background-color: #ff4c4c;
+ }
+ 
+ .blue-team {
+    background-color: #4c4cff;
+ }
+ 
+ .photo-container {
+    position: relative;
+    text-align: center;
+ }
+ 
+ .ateam-photo {
+    width: 70%;
+    border-radius: 10px;
+    position: relative;
+    right: 40px;
+ }
+ 
+ .bteam-photo {
+    width: 70%;
+    border-radius: 10px;
+    position: relative;
+    left: 40px;
+ }
+ /* .number {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.2em;
+ } */
+ 
+ /* 追加 */
+
+ html,body {
+    overflow: hidden;
+  }
+  
+
+@import url('https://fonts.googleapis.com/css?family=Exo:400,700');
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+body {
+    font-family: 'Exo', sans-serif;
+}
+
+.context {
+    width: 100%;
+    position: absolute;
+    top: 50vh;
+    transform: translateY(-50%);
+}
+
+.context h1 {
+    text-align: center;
+    color: #fff;
+    font-size: 50px;
+}
+
+.area {
+    background: #1a2a6c;  /* Base color */
+    background: -webkit-linear-gradient(to left, #1a2a6c, #b21f1f, #fdbb2d);  /* Gradient */
+    background: linear-gradient(to left, #1a2a6c, #b21f1f, #fdbb2d); /* Gradient */
+    width: 100%;
+    height: 100vh;
+}
+
+.circles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.circles li {
+    position: absolute;
+    display: block;
+    list-style: none;
+    width: 20px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.8); /* Star color */
+    animation: animate 25s linear infinite;
+    bottom: -150px;
+    clip-path: polygon(
+        50% 0%,
+        61% 35%,
+        98% 35%,
+        68% 57%,
+        79% 91%,
+        50% 70%,
+        21% 91%,
+        32% 57%,
+        2% 35%,
+        39% 35%
+    ); /* Star shape */
+}
+
+.circles li:nth-child(1) {
+    left: 25%;
+    width: 80px;
+    height: 80px;
+    animation-delay: 0s;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.circles li:nth-child(2) {
+    left: 10%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 2s;
+    animation-duration: 12s;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.circles li:nth-child(3) {
+    left: 70%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 4s;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.circles li:nth-child(4) {
+    left: 40%;
+    width: 60px;
+    height: 60px;
+    animation-delay: 0s;
+    animation-duration: 18s;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.circles li:nth-child(5) {
+    left: 65%;
+    width: 20px;
+    height: 20px;
+    animation-delay: 0s;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.circles li:nth-child(6) {
+    left: 75%;
+    width: 110px;
+    height: 110px;
+    animation-delay: 3s;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.circles li:nth-child(7) {
+    left: 35%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 7s;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.circles li:nth-child(8) {
+    left: 50%;
+    width: 25px;
+    height: 25px;
+    animation-delay: 15s;
+    animation-duration: 45s;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.circles li:nth-child(9) {
+    left: 20%;
+    width: 15px;
+    height: 15px;
+    animation-delay: 2s;
+    animation-duration: 35s;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.circles li:nth-child(10) {
+    left: 85%;
+    width: 150px;
+    height: 150px;
+    animation-delay: 0s;
+    animation-duration: 11s;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+@keyframes animate {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+    }
+
+    100% {
+        transform: translateY(-1000px) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+    }
+}
+
+/* 宇宙背景のスタイル */
+/* 宇宙背景のスタイル */
+body {
+    background: url('https://www.example.com/space-background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #fff;
+    font-family: 'Arial', sans-serif;
+}
+
+/* ログのセクション */
+.log {
+    position: absolute;
+    right: 90px;
+    bottom: 10px;
+    background-color: rgba(0, 0, 0, 0.7); /* 半透明の背景 */
+    border-radius: 10px;
+    width: 350px; /* 幅を指定 */
+    height: 290px;   /* 高さを指定 */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    overflow: auto;  /* 内容がはみ出たときにスクロールバーを表示 */
+}
+
+/* テーブル全体のスタイル */
+#log-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0; /* 上下のマージンを削除 */
+}
+
+/* テーブルヘッダーのスタイル */
+#log-table thead {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffcc00;
+}
+
+#log-table th {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #ffcc00;
+}
+
+/* テーブルボディのスタイル */
+#log-table tbody tr {
+    border-bottom: 1px solid #444;
+}
+
+#log-table td {
+    padding: 10px;
+    text-align: left;
+}
+
+/* 奇数行と偶数行の背景色 */
+#log-table tbody tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#log-table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* テーブルのボーダーとホバーエフェクト */
+#log-table tr:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
+.hint {
+    text-align: center;
+}
+
+.rno-counts {
+    position: fixed;
+    left: 340px;
+    top: 180px;
+    font-size: 40px; /* ここで文字サイズを指定 */
+    font-weight: bold; /* 太字にする場合 */
+
+}
+
+.bno-counts {
+    position: fixed;
+    right: 340px;
+    top: 180px;
+    font-size: 40px; /* ここで文字サイズを指定 */
+    font-weight: bold; /* 太字にする場合 */
+}
+
+#error-message {
+    color: black; /* テキスト色を白に設定 */
+    display: none; /* デフォルトで非表示 */
+}
+
+.counts {
+    position: fixed;
+    top:90px;
+}
+
+
+/*送信ボタンのcss*/
+@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
+
+.Button-style {
+  font-family: "Modak", cursive;
+  font-size: 15px;
+  display: inline-block;
+  padding: 0.2em 1em 0.1em;
+  color: #ff0066;
+  border: solid 2px #ff0066;
+  border-radius: 5px;
+  background-color: #fff0f8;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* アニメーションの追加 */
+}
+
+.Button-style:hover {
+  background-color: #ff0066;
+  color: #fff0f8;
+}
+
+
+
+.namerep{
+
+    position: relative;
+    padding: 0.25em 1em;
+    border: solid 2px #ffcb8a;
+    border-radius: 3px 0 3px 0;
+}
+.namerep:before,.box18:after
+{
+    content: '';
+    position: absolute;
+    width:10px;
+    height: 10px;
+    border: solid 2px #ffcb8a;
+    border-radius: 50%;
+}
+.namerep:after {
+    top:-12px;
+    left:-12px;
+}
+.namerep:before {
+    bottom:-12px;
+    right:-12px;
+}
+
+.earth-image {
+    position: fixed;
+    left: 170px;
+    bottom: 30px;
+    width: 200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+#error-message.hint-error{
+    color:white;
+}
+
+/* 宇宙テーマのヒント入力スタイル */
+.space-theme {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.space-theme label {
+    color: #ffffff; /* 白色 */
+    font-weight: bold;
+}
+
+.space-input, .space-select {
+    background-color: rgba(0, 0, 0, 0.7); /* 半透明の黒 */
+    border: 1px solid #ffffff; /* 白色のボーダー */
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #ffffff;
+    font-family: 'Exo', sans-serif;
+}
+
+.space-input:focus, .space-select:focus {
+    outline: none;
+    border-color: #00ffcc; /* シアン色のフォーカス */
+    box-shadow: 0 0 5px #00ffcc;
+}
+
+.space-select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px 12px;
+    padding-right: 30px;
+}
+
+/* ヒント入力のエラーメッセージ */
+.hint-error {
+    color: #ff4444; /* 赤色 */
+    font-weight: bold;
+    display: none;
+}

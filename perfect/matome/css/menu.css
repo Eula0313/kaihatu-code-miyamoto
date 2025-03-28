@@ -1,0 +1,116 @@
+header {
+    text-align: center;
+}
+
+.menu {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+}
+
+.menu-link {
+    margin: 5px;
+    padding: 5px;
+    text-align: center;
+    font-size: 28px;
+}
+
+a.sentaku {
+    margin: 0 20px 0 20px;
+    padding: 10px;
+}
+
+.sagasu-name {
+    font-size: 28px;
+    margin: 30px;
+    padding: 20px;
+    color: #55aaff;
+}
+
+.category-name {
+    white-space: nowrap;
+    font-size: 28px;
+    margin: 5px;
+    padding: 5px;
+    color: #55aaff;
+}
+
+.sidebar {
+    width: 15%;
+    text-align: center;
+    line-height: 2em;
+    margin: 20px;
+    padding: 10px;
+    border-right: #999 thick solid;
+}
+
+.menu-bar {
+    flex-grow: 1;
+}
+
+.main-contents {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    width: 85%
+}
+
+.shohin-img {
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center;
+}
+
+.shohin-category-img {
+    flex-direction: column;
+    flex-grow: 1;
+    text-align: center;
+}
+.shohin-category-img ul {
+    display: flex;
+    flex-wrap: wrap;
+}
+.shohin-category-img li {
+    display: inline-block;
+    flex-wrap: wrap;
+    flex-direction: column;
+    flex-grow: 1;
+    margin: auto;
+    padding: 10px;
+}
+
+.img {
+    width: 50%;
+    height: 50%;
+}
+
+.btn1,
+.btn2 {
+    position: relative;
+    white-space: nowrap;
+    margin: 5px;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+body,
+h1,
+header {
+    margin: 0;
+    padding: 0;
+}
+
+a.detail {
+    text-decoration: none;
+}

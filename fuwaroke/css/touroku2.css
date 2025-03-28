@@ -1,0 +1,43 @@
+.touroku1-container{
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.touroku1-header{
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-align: center;
+}
+
+.form-label{
+    display: block;
+    margin-bottom: 5px;
+}
+
+.input-field{
+    width: 95%;
+    padding: 10px;
+    margin-bottom: 50px;
+    border: 1px solid #0068b7;
+    border-radius: 5px;
+}
+
+    .next-button {
+        width: 100%;
+        padding: 10px;
+        background-color: #0068b7;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        gap: 1em;
+        flex-direction: column;
+    }
+    
+    .next-button:hover {
+        background-color: #00549e;
+    }

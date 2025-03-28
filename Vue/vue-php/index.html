@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Item List and Search Sample</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css"
+    />
+  </head>
+  <body>
+    <div id="app" class="container">
+      <div class="columns is-mobile is-centered">
+        <div class="column is-half">
+          <h1 class="title is-1">Item List and Search Sample</h1>
+
+          <div class="tabs is-centered">
+            <ul>
+              <li :class="{'is-active': acitiveWordsTab}">
+                <a @click="changeTab(1)">商品名で絞り込む</a>
+              </li>
+              <li :class="{'is-active': acitivePriceTab}">
+                <a @click="changeTab(2)">価格で絞り込む</a>
+              </li>
+            </ul>
+          </div>
+
+          <div v-if="acitiveWordsTab" class="field">
+            <label class="label" for="words">検索ワード</label>
+            <input
+              id="words"
+              class="input"
+              type="text"
+              name="words"
+              placeholder="商品名を入力してください"
+              v-model.trim="filterText"
+            />
+          </div>
+
+          <div v-if="acitivePriceTab" class="field">
+            <label class="label">価格帯</label>
+            <div class="control">
+              <label
+                v-for="price in prices"
+                :key="price.id"
+                class="radio"
+                :for="'price' + price.id"
+              >
+                <input
+                  :id="'price' + price.id"
+                  type="radio"
+                  name="price"
+                  :value="price.id"
+                  v-model="filterPriceId"
+                />
+                {{ price.text }}
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="columns is-mobile is-centered">
+        <div class="column is-half">
+          <table class="table is-striped is-fullwidth">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>商品名</th>
+                <th class="has-text-right">価格(円)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="item in filteredItems" :key="item.id">
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td class="has-text-right">{{ item.price }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p v-if="filteredItems.length === 0" class="has-text-centered">
+            対象の商品は見当たりませんでした。
+          </p>
+          <p v-show="errorFlag" class="has-text-centered has-text-danger">サーバとの通信にエラーが発生しています</p>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>
+    <script src="script/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.0/css/bulma.min.css" rel="stylesheet">
+    <title>6-2</title>
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <a class="navar-item" href="#"> ロゴ</a>
+                <div
+                 :class="{'is-active': isActive}"
+                class="navbar-burger" @click="toggleButton">
+                <span></span>
+                <span></span>
+                <span></span>
+                </div>
+            </div>
+            <div id="menu" class="navbar-menu" :class="{'is-active': isActive}">
+                <div class="navbar-start">
+                    <a class="navbar-item">
+                        メニュー1
+                    </a>
+                    <a class="navbar-item">
+                        メニュー2
+                    </a>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link">
+                        ドロップダウン
+                    </a>
+                <div class="navbar-dropdown">
+                    <a class="navbar-item">
+                        ドロップダウン1
+                    </a>
+                    <a class="navbar-item">
+                        ドロップダウン2
+                    </a>
+                    <hr class="navbar-divider">
+                    <a class="navbar-item">
+                        ドロップダウン3
+                    </a>
+                </div>
+                </div>
+                </div>
+                </div>
+        </nav>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/script.js"></script>
+</body>
+</html>

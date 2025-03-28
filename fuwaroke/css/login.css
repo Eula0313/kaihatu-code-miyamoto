@@ -1,0 +1,71 @@
+body.login-page {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-container {
+    width: 400px !important; /* 重要度を上げる */
+    max-width: 700px !important; /* 重要度を上げる */
+    margin: 20px !important; /* 重要度を上げる */
+    padding: 20px !important; /* 重要度を上げる */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-header {
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    text-align: left;
+}
+
+.input-field {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #0068b7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #00549e;
+}
+
+.forgot-password-link,
+.toroku-link {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.register-link {
+    color: #0068b7;
+}

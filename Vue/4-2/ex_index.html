@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bulma sample</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+<body>
+    <div id="app">
+        <button class="button is-link is-light is-normal" @click="increment">+1</button>
+        <button class="button is-danger is-midium" @click="decrement">-1</button>
+    <p>{{ count }}</p>
+    <div v-if ="isPass"><p>合格!</p>
+        <section>
+            <h2>おめでとうございます</h2>
+            <p>これからもがんばりましょう</p>
+        </section>
+        </div>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/script.js"></script>
+</body>
+</html>

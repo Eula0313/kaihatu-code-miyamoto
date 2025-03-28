@@ -1,0 +1,479 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  background-color: #72aef7;
+  color: white;
+  padding: 10px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  border: 3px solid #bababa;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.header-h1 {
+  font-size: clamp(20px, 8vw, 32px);
+  word-break: keep-all;
+}
+.side-h2 {
+  font-size: clamp(16px, 8vw, 26px);
+  word-break: keep-all;
+}
+
+.sidebar {
+  height: calc(100% - 50px); /* ヘッダーの高さを引いた高さ */
+  margin: 15px 0px;
+  /* width: 200px; */
+  position: fixed;
+  top: 50px; /* ヘッダーの高さに合わせて調整 */
+  left: 0;
+  background-color: #72aef7;
+  padding-top: 20px;
+  overflow-y: auto; /* スクロール可能にする */
+  border: 3px solid #bababa;
+  z-index: 0;
+}
+
+.sidebar h2 {
+  color: white;
+  text-align: center;
+}
+
+/* .sidebar ul {
+  list-style-type: none;
+  padding: 8px;
+} */
+
+.sidebar ul li {
+  padding: 10px;
+  text-align: center;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  display: block;
+}
+
+.sidebar ul li a:hover {
+  background-color: #575757;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 240px;
+  padding: 20px;
+  padding-top: 70px;
+  z-index: 1;
+}
+
+.flex-content {
+  flex-grow: 1;
+  margin: 10px;
+  padding: 5px;
+}
+
+.user-list {
+  margin: 10px;
+  padding: 5px;
+}
+
+.board-list {
+  margin: 10px;
+  padding: 5px;
+}
+
+.content-title {
+  margin: 10px;
+  padding: 5px;
+  font-size: clamp(20px, 8vw, 36px);
+  word-break: keep-all;
+}
+
+/* ログイン画面 */
+.login-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 60px); /* Adjust for header height */
+}
+
+.login-flex-content {
+  background-color: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  width: 300px;
+}
+.login-form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-bottom: 8px;
+}
+
+.login-id,
+.login-pass {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.login-button {
+  background-color: #72aef7;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.login-button:hover {
+  background-color: #5e98d9;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Responsive adjustments */
+/* @media screen and (max-width: 600px) {
+  .flex-content {
+    width: 90%;
+  }
+} */
+/* @media screen and (max-width: 1000px) {
+  .sidebar {
+    width: 30%;
+  }
+} */
+/* @media screen and (max-width: 600px) {
+  .header {
+    width: 100%;
+  }
+} */
+
+.header-h1 {
+  font-size: clamp(20px, 8vw, 32px);
+  word-break: keep-all;
+}
+.side-h2 {
+  font-size: clamp(16px, 8vw, 26px);
+  word-break: keep-all;
+}
+
+/* テーブルの基本スタイル */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+}
+
+/* テーブルヘッダーのスタイル */
+table thead tr {
+  background-color: #00aaff;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+}
+
+/* テーブルヘッダーとテーブルデータのボーダー */
+table th {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+table td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+  color: #333;
+}
+
+/* 偶数行のスタイル */
+table tbody tr:nth-of-type(even) {
+  background-color: #f4feff;
+}
+
+/* 奇数行のスタイル */
+table tbody tr:nth-of-type(odd) {
+  background-color: #e1f5fe;
+}
+
+/* テーブルのホバー時のスタイル */
+table tbody tr:hover {
+  background-color: #b3e5fc;
+}
+
+/* テーブルデータのフォントカラー */
+.category-delete {
+  text-align: center;
+}
+
+.content-mypage {
+  /* width: 100%;
+  padding: 20px;
+  display: flex;
+  max-width: 1250px;
+  width: calc(100% - 220px); 
+  background-color: #fff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 100px; 
+  margin-left: 220px; 
+  padding: 20px;
+  border-radius: 8px; */
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin-left: 200px;
+  padding: 20px;
+  padding-top: 70px;
+}
+
+.flex-content-mypage {
+  flex-grow: 1;
+  margin: 10px;
+  padding: 50px 20px;
+  background-color: #eee;
+  width: calc(100% - 50%);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1), 0 3px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-left: 20%;
+}
+
+.profile {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.photo-left {
+  text-align: center;
+  position: relative;
+}
+
+.photo-left img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px solid #ffffff;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.name {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  color: #333;
+}
+
+.desc {
+  text-align: center;
+  margin: 20px 15%;
+  color: #555;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+  word-wrap: break-word;
+}
+
+.social {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.social i {
+  font-size: 30px;
+  margin: 0 10px;
+  color: #555;
+}
+
+.social i:hover {
+  color: #000;
+}
+
+.btn {
+  display: inline-block;
+  padding: 10px 20px;
+  margin-top: 20px;
+  font-size: 14px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  background-color: #d5d5d5;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  margin: 10px;
+}
+
+.btn:hover {
+  background-color: #757575;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+}
+
+.posts {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.posts h3 {
+  font-family: "Montserrat", sans-serif;
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.posts a {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.posts a:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.posts p {
+  margin: 10px 0;
+}
+
+.user-delete-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  border: none;
+  background-color: #ff4c4c;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.customer-head {
+  display: flex;
+  align-items: center;
+}
+.board-head {
+  display: flex;
+  align-items: center;
+}
+.category-head {
+  display: flex;
+  align-items: center;
+}
+
+.search-form {
+  margin-left: auto;
+  margin-right: 20px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-input {
+  width: 200px;
+  padding: 8px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #4a90e2;
+}
+
+.search-button {
+  margin: 0 10px;
+  padding: 5px 12px;
+  border: 2px solid #4a90e2;
+  border-radius: 4px;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+}
+
+.search-button:hover {
+  background-color: #357abd;
+}
+
+.logout-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #ff9191;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-left: auto; /* 必要に応じて調整 */
+  margin-right: 40px;
+  text-align: center;
+}
+.logout-button:hover {
+  background-color: #d15353;
+}
+
+.category-delete-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #ff9191;
+  color: white;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin-left: auto; /* 必要に応じて調整 */
+  margin: 0 20px;
+  text-align: center;
+}
+
+.category-delete-button:hover {
+  background-color: #d15353;
+}

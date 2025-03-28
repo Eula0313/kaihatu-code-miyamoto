@@ -1,0 +1,116 @@
+header {
+    text-align: center;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /*overflow: hidden;*/
+}
+
+.product-container {
+    display: flex;
+   /* border: 1px solid #ccc;*/
+    max-width: 1300px;
+    /*width: 130%;*/
+    box-sizing: border-box;
+    padding: 30px;
+    /*transform: scale(1.5);*/
+    transform-origin: top left;
+}
+.left-column {
+    flex-basis: 85%; 
+    padding-left: 150px;
+    width: 350px;
+
+}
+
+.brand-name {
+    font-size: 20px;
+    font-weight: bold;
+}
+.product-image {
+    max-width: 50%;
+    height: auto;
+}
+.right-column {
+    flex-basis: 60%;
+    /*margin-right: 300px;*/ 
+    font-size: large;
+}
+.product-details {
+    font-size: 16px;
+    line-height: 1.5;
+}
+.size-inventory {
+    list-style: none;
+    padding: 0;
+}
+.size-inventory ul {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+.inventory-status {
+    margin-right: 10px;
+}
+.size-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10p
+}
+
+.cart{
+    width: 200px;
+    height: 50px;
+    margin: 20px auto;
+    border: none;
+    padding-bottom: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #000;
+    border: 2px solid #000;
+    background: #fff;
+    font-weight: bold;
+    margin-right: 5px;
+    margin-top: 20px;
+    text-decoration: none; 
+}
+.cart:hover {
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+}
+
+.favo{
+    display: flex;
+    width: 200px;
+    height: 50px;
+    /* margin: 20px auto; */
+    border: none;
+    padding-bottom: 10px;
+    padding: 10px 10px;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
+    background: #ffffff;
+    font-weight: bold;
+    margin-right: 5px;
+    margin-top: 20px;
+    text-decoration: none; 
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+}
+.favo:hover {
+    background-color: rgb(0, 0, 0);
+    color: #ffffff;
+    border: 2px solid #000000;
+}
+
+body,
+header {
+    margin: 0;
+    padding: 0;
+}

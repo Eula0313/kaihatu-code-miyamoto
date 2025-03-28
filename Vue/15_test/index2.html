@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>課題2</title>
+</head>
+<body>
+    <div id="app">
+            <h1>研修受付</h1>
+            <p>{{ text }}</p>
+            <button @click="entry">受付</button>
+            <p>受付番号</p>
+            <input type="text" name="number" v-model="number"/>
+            <p v-if="isInValidnumber" class="error">
+                受付番号は１～９９の数値です
+            </p>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/script2.js"></script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Onest', sans-serif;
+}
+
+:root {
+  --color-white: #fff;
+  --color-1: #350048;
+  --color-2: rgba(255, 255, 255, 0.05);
+  --color-3: rgba(0, 0, 0, 0.2);
+  --color-4: rgba(255, 255, 255, 0.1);
+  --color-gradient-1: rgba(255, 255, 255, 0.15);
+  --red-color: #ff4c4c;
+  --blue-color: #4c4cff;
+  --button-hover: rgba(255, 255, 255, 0.2);
+  --button-shadow: 0 0 5px;
+}
+
+.Name {
+   position: fixed;
+   left: 50%;
+   bottom: 0;
+   transform: translateX(-50%);
+   width: 100%; /* 幅を100%に設定 */
+   text-align: center;
+   z-index: 100; /* テキストが星の上に表示されるようにするための設定 */
+}
+
+.namebox {
+   text-align: center;
+   display: inline-block; /* インラインブロック要素に変更 */
+   background-color: #2d73c2;
+   padding: 10px;
+   border-radius: 5px;
+   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+   color: #ffffff; /* 文字色を白に設定 */
+}
+
+body {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh; /* ページ全体を画面に合わせる */
+   margin: 0; /* デフォルトのマージンを削除 */
+   background-color: #f5f5f5;
+   font-family: Arial, sans-serif;
+}
+
+.container {
+   margin: AUTO;
+   display: flex;
+   justify-content: space-between;
+   width: 80%;
+   margin-top: 90px; /* 上部のマージンを追加 */
+}
+
+.team-box {
+   width: 30%;
+   padding: 20px;
+   border-radius: 10px;
+   color: white;
+   text-align: center;
+}
+
+.red-team {
+   background-color: var(--red-color);
+}
+
+.blue-team {
+   background-color: var(--blue-color);
+}
+
+.photo-container {
+   position: relative;
+   text-align: center;
+}
+
+.team-photo {
+   width: 100%;
+   border-radius: 10px;
+}
+
+.number {
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   background-color: rgba(0, 0, 0, 0.5);
+   border-radius: 50%;
+   width: 30px;
+   height: 30px;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   color: white;
+   font-size: 1.2em;
+}
+
+.team-info {
+   text-align: center;
+}
+
+.info-box {
+   width: 40%;
+   padding: 20px;
+   background-color: rgb(0, 0, 0);
+   border-radius: 10px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-box h2{
+   padding: 10px;
+}
+
+.info-box p {
+   border: 2px solid #ffffff; /* 黒い枠を追加 */
+   padding: 10px; /* 内側の余白を追加 */
+   background-color: #f3f2f2; /* 背景色を白に設定 */
+   color: #0e0d0d; /* 文字色を白に設定 */
+   border-radius: 5px; /* 角を少し丸める */
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 黒いシャドウを追加 */
+}
+
+.info-box {
+   position: relative; /* 相対位置を設定 */
+}
+
+.info-box button {
+   display: block; /* ボタンをブロック要素にする */
+   margin: 0 auto; /* ボタンを中央に配置 */
+   padding: 10px 20px; /* パディングを追加 */
+   background-color: #007BFF; /* 背景色を設定 */
+   color: white; /* 文字色を設定 */
+   border: none; /* ボーダーを無しに設定 */
+   cursor: pointer; /* カーソルをポインターに変更 */
+   font-size: 16px; /* フォントサイズを設定 */
+   position: absolute; /* 絶対位置を設定 */
+   bottom: 100px; /* 下からの位置を設定 */
+   left: 50%; /* 左からの位置を設定 */
+   transform: translateX(-50%); /* 中央揃え */
+}
+
+.info-box button:hover {
+   background-color: #0056b3; /* ホバー時の背景色を設定 */
+}
+
+.stars {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background-image: linear-gradient(0deg, #00dedc, #115d89, #080f1c);
+   overflow: hidden;
+}
+
+.star {
+   position: absolute;
+   display: block;
+   background-color: #fff;
+   border-radius: 50%;
+   box-shadow: 0 0 4px 2px rgba(255, 255, 255, 0.2);
+   opacity: 0;
+   animation: twinkle 5s infinite;
+}
+
+@keyframes twinkle {
+   0% {
+       opacity: 0;
+   }
+   50% {
+       transform: scale(1.1);
+       opacity: 1;
+   }
+   100% {
+       opacity: 0;
+       transform: scale(1);
+   }
+}
+
+/* Red and Blue Buttons */
+.role-button {
+  position: relative;
+  width: 155px;
+  height: 50px;
+  margin: 10px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-white);
+  z-index: 1;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-decoration: none;
+  overflow: hidden;
+  transition: 0.8s;
+  backdrop-filter: blur(15px);
+  border-radius: 30px;
+  border-top: 1px solid var(--color-4);
+  border-bottom: 1px solid var(--color-4);
+  background: var(--color-2);
+  box-shadow: 0 15px 35px var(--color-3);
+}
+
+.role-button:hover {
+  letter-spacing: 3px;
+}
+
+.role-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to left, var(--button-hover), transparent);
+  transform: skewX(45deg) translateX(0);
+  transition: 0.8s;
+}
+
+.role-button:hover::before {
+  transform: skewX(45deg) translateX(200%);
+}
+
+.role-button::before,
+.role-button::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30px;
+  height: 10px;
+  border-radius: 10px;
+  transition: 0.8s;
+  transition-delay: 0s;
+}
+
+.role-button:hover::before,
+.role-button:hover::after {
+  height: 50%;
+  width: 80%;
+  border-radius: 30px;
+  transition-delay: 0.5s;
+}
+
+.role-button::before {
+  bottom: -5px;
+}
+
+.role-button::after {
+  top: -5px;
+}
+
+/* Specific Color for Red Button */
+.red-button::before,
+.red-button::after {
+  background: var(--red-color);
+  box-shadow: var(--button-shadow) var(--red-color);
+}
+
+/* Specific Color for Blue Button */
+.blue-button::before,
+.blue-button::after {
+  background: var(--blue-color);
+  box-shadow: var(--button-shadow) var(--blue-color);
+}
+
+/*参加ボタンのcss*/
+@import url('https://fonts.googleapis.com/css2?family=Modak&display=swap');
+
+.Button-style {
+  font-family: "Modak", cursive;
+  font-size: 15px;
+  display: inline-block;
+  padding: 0.2em 1em 0.1em;
+  color: #ff0066;
+  border: solid 2px #ff0066;
+  border-radius: 5px;
+  background-color: #fff0f8;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* アニメーションの追加 */
+}
+
+.Button-style:hover {
+  background-color: #ff0066;
+  color: #fff0f8;
+}
+
+body {
+   font-family: 'Noto Sans JP', sans-serif;
+   background-color: #0a0a0a;
+   color: #fff;
+   text-align: center;
+   padding: 50px;
+}
+
+h1, p {
+   color: #00f5d4; /* 明るい青緑色で未来的な印象を与える */
+   /* グローエフェクト */
+   background: linear-gradient(45deg, #00f5d4, #00aaff);
+   -webkit-background-clip: text; /* WebKitブラウザ用 */
+   background-clip: text; /* 標準プロパティ */
+   -webkit-text-fill-color: transparent; /* WebKitブラウザ用 */
+   /* グラデーションテキスト */
+}
+
+
+h1{
+   font-size: 3em;
+   margin-bottom: 20px;
+   animation: pulse 1.5s infinite; /* アニメーション */
+}
+
+
+@keyframes pulse {
+   0% {
+       text-shadow: 0 0 5px rgba(0, 255, 255, 0.5), 0 0 10px rgba(0, 255, 255, 0.5), 0 0 15px rgba(0, 255, 255, 0.5);
+   }
+   50% {
+       text-shadow: 0 0 15px rgba(0, 255, 255, 0.7), 0 0 25px rgba(0, 255, 255, 0.7), 0 0 35px rgba(0, 255, 255, 0.7);
+   }
+   100% {
+       text-shadow: 0 0 5px rgba(0, 255, 255, 0.5), 0 0 10px rgba(0, 255, 255, 0.5), 0 0 15px rgba(0, 255, 255, 0.5);
+   }
+}

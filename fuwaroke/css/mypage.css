@@ -1,0 +1,191 @@
+html, body {
+    background: #efefef;
+    font-family: "Arial", sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-image: url('../image/haikei.jpg');
+}
+
+.container {
+   
+    max-width: 650px;
+    margin: 30px auto;
+    background-color: #fff;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1), 0 3px 6px rgba(0,0,0,0.1);
+    padding-left: 30px;
+    padding-right: 30px;
+    
+}
+
+.content {
+    width: 100%;
+    padding-bottom: 40px;
+    margin-right: 20px;
+   
+}
+
+.profile {
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 20px;
+
+}
+
+.photo-left {
+    text-align: center;
+    position: relative;
+}
+
+.photo-left img {
+    width: 255px;
+    height: 250px;
+    border-radius: 50%;
+    border: 4px solid #ffffff;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+}
+
+.active {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    width: 20px;
+    height: 20px;
+    background-color: #4caf50;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.name {
+    margin-top: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    color: #333;
+}
+
+.info {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    color: #777;
+}
+
+.dai {
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+}
+
+.desc {
+    text-align: center;
+    margin-top: 20px;
+    color: #555;
+    font-size: 14px;
+    font-family: 'Montserrat', sans-serif;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ededed;
+    color: #333;
+}
+
+.desc-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 20px;
+    color: #333;
+    border-top: 1px solid #ededed;
+    padding-top: 10px;
+}
+
+.desc-content {
+    width: 82%;
+    font-size: 14px;
+    color: #555;
+    margin-top: 15px;
+    word-wrap: break-word;
+    margin: 0% 10% 0% 10%;
+}
+
+.social {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.social i {
+    margin: 0 10px;
+    color: #555;
+}
+
+.social i:hover {
+    color: #000;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 10px;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    margin: 10px;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.error-message {
+    color: red;
+    text-align: center;
+    font-size: 24px;
+}
+
+.posts {
+    margin-top: 30px;
+    border: 1px solid #c0c0c0;
+    padding: 20px;
+    background-color: #fff;
+    
+}
+
+.posts h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #c0c0c0;
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.posts .post-item {
+
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+}
+
+.posts .post-item:last-child {
+    border-bottom: none;
+}
+
+.posts a {
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.posts a:hover {
+    text-decoration: underline;
+}
+
+.post-meta {
+    font-size: 12px;
+    color: #777;
+}

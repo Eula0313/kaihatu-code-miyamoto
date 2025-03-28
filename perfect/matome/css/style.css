@@ -1,0 +1,417 @@
+/*syori.php*/
+div.syori{
+  display: flex;
+  justify-content: center;
+  font-size: 15px;
+}
+p.syori{
+  text-align: center;
+  font-size: 15px;
+}
+input.syoritext {
+  margin: 0 auto;
+}
+
+p.error{
+  text-align: center;
+  font-size: 15px; 
+  color: red;
+}
+p.toroku{
+text-align: center;
+font-size: 15px; 
+
+}
+a.toroku{
+text-decoration: none;
+}
+
+table.syori {
+  width: 100%;
+  height: 80%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  text-align: center;
+}
+
+td.syori,td.img{
+  padding: 5px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+}
+
+tr.syori {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  background-color: #fff;
+}
+
+.product-name {
+  flex-grow: 1;
+  margin-right: 10px;
+}
+
+.product-info {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 24px;
+}
+
+td.product-info{
+  text-align: left;
+  border-collapse: collapse;
+}
+
+.product-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
+.product-name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+
+div.total{
+  text-align: right;
+  font-size: 20px;
+
+}
+h2.total2{
+  color:rgb(0, 0, 0);
+}
+@import "https://use.fontawesome.com/releases/v5.13.0/css/all.css";
+
+*,
+*:before,
+*:after {
+-webkit-box-sizing: inherit;
+box-sizing: inherit;
+}
+
+html {
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+font-size: 62.5%;
+}
+
+/* 閭梧勹逕ｨ*/
+/* body {
+padding: 30px;
+} */
+
+.btn,
+a.btn,
+button.btn {
+font-size: 1.6rem;
+font-weight: 700;
+line-height: 1.5;
+position: relative;
+display: inline-block;
+padding: 1rem 4rem;
+cursor: pointer;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+-webkit-transition: all 0.3s;
+transition: all 0.3s;
+text-align: center;
+vertical-align: middle;
+text-decoration: none;
+letter-spacing: 0.1em;
+color: #212529;
+border-radius: 0.5rem;
+}
+
+a.btn-3d-flip {
+display: block;
+
+width: 200px;
+margin: 0 auto;
+padding: 0;
+
+-webkit-perspective: 600px;
+
+perspective: 600px;
+}
+
+a.btn-3d-flip:hover .btn-3d-flip-box {
+-webkit-transform: translateY(-50%) rotateX(90deg);
+transform: translateY(-50%) rotateX(90deg);
+}
+
+a.btn-3d-flip.btn-3d-flip2:hover .btn-3d-flip-box2 {
+-webkit-transform: translateX(-50%) rotateY(-90deg);
+transform: translateX(-50%) rotateY(-90deg);
+}
+
+.btn-3d-flip-box {
+position: relative;
+
+display: block;
+
+width: 100%;
+height: 100%;
+margin: auto;
+
+-webkit-transition: all 0.4s;
+
+transition: all 0.4s;
+-webkit-transform: rotateX(0);
+transform: rotateX(0);
+text-decoration: none;
+text-transform: uppercase;
+
+color: #fff;
+
+-webkit-transform-style: preserve-3d;
+
+transform-style: preserve-3d;
+}
+
+.btn-3d-flip-box2 {
+position: relative;
+
+display: block;
+
+width: 100%;
+height: 100%;
+margin: auto;
+
+-webkit-transition: all 0.4s;
+
+transition: all 0.4s;
+-webkit-transform: rotateY(0);
+transform: rotateY(0);
+text-decoration: none;
+text-transform: uppercase;
+
+color: #fff;
+
+-webkit-transform-style: preserve-3d;
+
+transform-style: preserve-3d;
+}
+
+.btn-3d-flip-box-face {
+display: block;
+position: relative;
+
+width: 100%;
+padding: 1.5rem 0;
+
+-webkit-transition: all 0.4s;
+
+transition: all 0.4s;
+
+color: #fff;
+
+-webkit-backface-visibility: hidden;
+
+backface-visibility: hidden;
+}
+
+.btn-3d-flip-box-face--front {
+background: #eb6100;
+}
+
+.btn-3d-flip-box-face--back {
+position: absolute;
+top: 100%;
+left: 0;
+
+-webkit-transform: translateY(-1px) rotateX(-90deg);
+
+transform: translateY(-1px) rotateX(-90deg);
+-webkit-transform-origin: 50% 0;
+transform-origin: 50% 0;
+
+background: #dc5b00;
+}
+
+.btn-3d-flip-box-face--front2 {
+color: #000;
+border: 2px solid #000;
+background: #fff;
+}
+
+.btn-3d-flip-box-face--back2 {
+position: absolute;
+top: 0;
+left: 100%;
+
+-webkit-transform: translateX(-1px) rotateY(90deg);
+
+transform: translateX(-1px) rotateY(90deg);
+-webkit-transform-origin: 0 0;
+transform-origin: 0 0;
+
+color: #fff;
+border: 2px solid #000;
+background: #000;
+}
+
+.fa-position-right {
+position: absolute;
+top: calc(50% - 0.5em);
+right: 1rem;
+}
+
+
+/*header.php*/
+.header-h1 a {
+  color: black; /* 譁�ｭ苓牡繧堤區縺ｫ險ｭ螳� */
+  text-decoration: none; /* 荳狗ｷ壹ｒ蜑企勁縺吶ｋ蝣ｴ蜷医�蠢�ｦ√↓蠢懊§縺ｦ */
+}
+
+
+
+
+div.ARIGATOU{
+  display: block;
+  padding: 0px;
+  font-size: 28px;
+  justify-content: center;
+  margin: 0px;
+}
+
+div.header-logo {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px;
+  padding: 5px;
+}
+
+div.header-kensaku {
+  display: inline-block;
+  margin: 0 20px 0 20px;
+  padding: 5px;
+  vertical-align: middle;
+  width: auto;
+}
+#kensaku {
+  margin: auto;
+  width: 500px;
+  height: 40px;
+  border-radius: 10px;
+  font-size: large;
+}
+
+div.header-button {
+  display: inline-block;
+  margin: 20px;
+  padding: 10px;
+}
+
+div.header-cart {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px;
+  padding: 5px;
+  width: auto;
+}
+div.header-mypage {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px;
+  padding: 5px;
+  width: auto;
+}
+div.header-favo {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px;
+  padding: 5px;
+  width: auto;
+}
+
+/*kato.php*/
+
+
+
+
+/*Konyukanryo.php*/
+.ori {
+  z-index: -1;
+  position: fixed;
+  top: 0px;
+  left: 100px;
+  width: 1250px;
+  height: 852px;
+  flex-shrink: 0;
+}
+.jagaimo-2 {
+  z-index: -2;
+  position: fixed;
+  bottom: 600px;
+  left: 150px;
+  width: 160.5px;
+  height: 132.5px;
+  flex-shrink: 0;
+}
+
+.mimizu {
+  z-index: -3;
+  position: fixed;
+  bottom: 100px;
+  left: 100px;
+  width: 192px;
+  height: 252px;
+  flex-shrink: 0;
+}
+
+.yama {
+  z-index: -4;
+  position: fixed;
+  top: -60px;
+  left: -140px;
+  width: 1000.92px;
+  height: 900.379px;
+  flex-shrink: 0;
+}
+
+body.Konyukanryo {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0; 
+  font-size: 18px; 
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  color: #333;
+}
+
+h1.Konyukanryo {
+  font-size: 48px; 
+  color: #333;
+  margin-top: 20px;
+}
+
+div.Konyukanryo {
+  font-size: 96px;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  margin: auto;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 24px; 
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>課題3</title>
+</head>
+<body>
+    <h1>宿泊情報</h1>
+    <div id="app">
+        <p>日数を選択してください</p>
+        <button @click="increment">+1</button>
+        <button @click="decrement">-1</button>
+    {{ day }}日
+   <p>宿泊の希望金額を選択してください</p>
+    <input type="radio" v-model="fee" value="5000" /> 5000
+    <input type="radio" v-model="fee" value="7000" /> 7000
+    <p>-------------------------</p>
+    <button @click="multiply">合計</button>{{ total }}円
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/script3.js"></script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://use.fontawesome.com/releases/v5.15.4/css/all.js" defer ></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <title>4-5</title>
+</head>
+<body>
+    <div id="app">
+        <div class="form-area__name">
+            <i class="fas fa-smile"></i>
+            <p>名前</p>
+            <input type="text" name="name" v-model="name"/>
+            <p v-if="isInValidName" class="has-text-danger">
+                名前は4文字以上で入力して下さい
+            </p>
+        </div>
+        <div class="form-area__tel">
+            <i class="fas fa-phone"></i>
+            <br>
+            <p>電話番号</p>
+            <input type="tel" name="tel" v-model="tel"/>
+            <p v-if="isInValidTel" class="has-text-danger">
+                電話番号は8文字以上で入力して下さい
+            </p>
+        </div>
+        <div class="form-area__email">
+            <i class="fas fa-envelope"></i>
+            <br>
+            <p>Eメールアドレス</p>
+            <input type="text" name="email" v-model="email"/>
+            <p v-if="isInValidEmail" class="has-text-danger">
+                Eメールアドレスの形式で入力して下さい
+            </p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/ex2_script.js"></script>
+</body>
+</html>

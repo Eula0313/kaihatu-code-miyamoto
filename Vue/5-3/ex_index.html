@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9/4/css/bulma.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <title>5-3</title>
+</head>
+<body>
+    <div id="app" class="has-background-grey-lighter">
+        <ul class="header-menu">
+            <li v-for="(item, i) in menus" :key="i" class="menu-item">
+                <a :href="item.path"><i :class="item.icon"></i>{{ item.label }}</a>
+            </li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/ex_script.js"></script>
+</body>
+</html>

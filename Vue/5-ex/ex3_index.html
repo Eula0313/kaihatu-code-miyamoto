@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://use.fontawesome.com/releases/v5.15.4/css/all.js" defer ></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <title>5-ex</title>
+</head>
+<body>
+    <div id="app">
+        <p class="has-text-info">次の学科の学生が対象です。名前と年齢を入力してください。</p>
+        <ul>
+            <li v-for="(item, i) in obj" :key="i">{{ item.label }}</li>
+        </ul>
+        <br>
+        <p class="has-text-info">名前</p>
+        <input type="text" name="name" v-model="name" />
+        <p class="has-text-info">年齢</p>
+        {{ ninzu }}
+        <button @click="increment" class="button is-link is-outlined is-small is-success">+1</button>
+        <button @click="decrement" class="button is-link is-outlined is-small is-success">-1</button>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/ex3_script.js"></script>
+</body>
+</html>
+    

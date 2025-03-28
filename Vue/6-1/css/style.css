@@ -1,0 +1,31 @@
+.btn-humburger {
+    width: 56px;
+    height: 56px;
+    background: transparent;
+    position: relative;
+}
+.btn-humburger > div {
+    position: absolute;
+    width: 56px;
+    height: 3px;
+    transition: all 0.25; background-color: #000;
+}
+.btn-humburger > div:first-child {
+    top: 15px;
+    left: 0;
+    }
+
+.btn-humburger > div:last-child { 
+    bottom: 15px;
+    left: 0;
+    }
+
+.btn-humburger.is-active > div:first-child {
+    -webkit-transform: translateY(11px) rotate(45deg) ;
+    transform: translateY(11px) rotate(45deg) ;
+}
+
+.btn-humburger.is-active > div:last-child {
+    -webkit-transform: translateY(-10px) rotate(-45deg) ;
+    transform: translateY(-10px) rotate(-45deg) ;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7-1</title>
+</head>
+<body>
+    <div id="app"> 
+        <article class="wrap">
+            <section class="todo-form">
+                <input type="text" name="todo-text" class="input-text" placeholder="please input todo" :value="text" @input="inputText"/>
+                <button class="add-button" @click="addTodo">ADD TODO</button>
+            </section> 
+            <section class="list-area">
+                <div class="area-incomplete">
+                    <p class="todo-title">incomplete items</p> 
+                    <ul class="todo-area">
+                        <li v-for="(item, i) in todos" :key="i" class="list">
+                            <span class="list-label">{{item.text}}</span>
+                        </li>
+                    </ul>
+                </div> 
+            </section>
+        </article> 
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/script.js"></script> 
+</body>
+</html>

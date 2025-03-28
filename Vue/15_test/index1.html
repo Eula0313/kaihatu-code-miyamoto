@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>課題</title>
+</head>
+<body>
+    <h1>研修コース</h1>
+    <div id="app">
+        <ul>
+            <li v-for="(seminars,i) in seminars" :key="i">{{ seminars.label }}</li>
+        </ul>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="./script/script1.js"></script>
+</body>
+</html>

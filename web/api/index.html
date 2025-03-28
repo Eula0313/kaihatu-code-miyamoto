@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>WebAPI</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h3>入力フォーム</h3>
+    <dl>
+        <dt>学籍番号</dt>
+        <dd>
+            <input type="text" name="no">
+        </dd>
+        <dt>点数</dt>
+        <dd>
+            <input type="text" name="score">
+        </dd>
+        <dt>氏名</dt>
+        <dd>
+            <input type="text" name="name">
+        </dd>
+    </dl>
+    <button id="btn">送信</button>
+    <hr>
+    <h3>結果表示</h3>
+    <textarea id="ajax_return" rows="5">
+    </textarea>
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
